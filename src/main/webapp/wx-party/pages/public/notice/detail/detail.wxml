@@ -1,0 +1,18 @@
+<import src="../../../../lib/wxParse/wxParse.wxml"/>
+<view class='container'>
+  <view class='title-wrapper'>
+    <view class='title'>{{detail.News.title}}</view>
+    <view class='title-tip'>
+      <view class='title-tip-left'>
+        <text class='time'>{{detail.News.creat_time}} {{detail.News.author?detail.News.author:""}}</text>
+      </view>
+      <view class='title-tip-right'>
+        <text class='iconfont icon-eye'></text>{{detail.News.version}}
+      </view>
+    </view>
+  </view>
+  <toast id='toast'>{{content}}</toast>
+  <view class='detail-content'>
+    <view class='content-box'><template is="wxParse" data="{{wxParseData:content.nodes}}"/></view>
+  </view>
+</view>

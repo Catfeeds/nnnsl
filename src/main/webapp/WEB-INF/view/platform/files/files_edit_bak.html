@@ -1,0 +1,32 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/update" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="nsl_files";
+		@ var _key="id";
+		@ var _col=[
+@			  {name:"", index:"id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"公文类型", index:"type", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"公文文号", index:"num", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"起草部门", index:"d_id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"经办人", index:"u_id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"文件名", index:"title_o", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"文件名_系统", index:"title_new", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"主送", index:"visiable", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"抄送", index:"copy", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"公文描述", index:"discript", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"部门领导批示", index:"d_opinion", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"领导班子批示", index:"l_opinion", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"总经理批示", index:"h_opinion", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"version", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"date", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"进度", index:"status", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"是否提交", index:"issubmit", type:"text",newline:true,length:8,required:"required"}		
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+	</form>
+
+@}

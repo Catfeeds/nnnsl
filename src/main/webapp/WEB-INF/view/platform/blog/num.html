@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title>南丝路OA桌面小工具</title>
+	<meta http-equiv="MSThemeCompatible" CONTENT="yes" />
+	<script language="JavaScript">
+        function myrefresh()
+        {
+            window.location.reload();
+        }
+        setTimeout('myrefresh()',10000); //指定10秒刷新一次
+	</script>
+</head>
+<body>
+
+
+<style>
+body{
+		margin: 0;
+		width: 100px;
+		height:100px;
+		border:1px solid #000000;
+		font-weight: bold;
+		font-size:small;
+		background-color:red;
+		vertical-align:top;
+		text-align: center;
+		font-size:14px;
+	}
+	#num{
+		font-size:72px;
+		color:white;
+	}
+	#up{
+		height:25px;
+		background-color:white;
+	}
+	#top{
+		font-size:18px;
+	}
+
+</style>
+<div id="up">
+	<span id="top">待办事项</span>
+</div>
+<div>
+	<span id="num">${num!}</span>
+</div>
+</body>
+</html>

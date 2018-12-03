@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>JS版组织结构图</title>
+    <script language="javascript" src="/static/lct/organization.js"></script>
+    <style type="text/css">
+        .OrgBox{
+            font-size:12px;
+            padding:5px 5px 5px 5px;
+            clear:left;
+            float:left;
+            text-align:center;
+            position:absolute;
+            width:70px;
+            height:106px;
+        }
+        .OrgBox img{
+            width:60px;
+            height:70px;
+        }
+        .OrgBox div{
+            color:#FFA500;
+            font-weight:800;
+        }
+    </style>
+    <script>
+        // var box = document.getElementById('OrgBox');
+        //box.onclick
+        function CookieGroup(){
+        }
+    </script>
+</head>
+<body>
+<script language="javascript">
+
+    var a=new OrgNode()
+    var list = ${list};
+    console.log("list");
+    console.log(list);
+    var newlist = new Array();
+    for ( var i = 0; i <list.length; i++){
+        var temp = new OrgNode();
+        temp.Id = list[i].id
+        temp.pid = list[i].pid
+        temp.customParam.EmpPhoto = list[i].EmpPhoto
+        temp.customParam.EmpName = list[i].EmpName
+        newlist.push(temp);
+    }
+    console.log("newlist");
+    console.log(newlist);
+
+    for(var i = 0; i< newlist.length;i++){
+        var id = newlist[i].Id
+        var ppid = newlist[i].pid
+        console.log("ppid=======")
+        console.log(ppid == 0)
+        if(ppid == -1){
+            a = newlist[i]
+        }
+        // a = newlist[0]
+
+        for(var j = 0;j<newlist.length;j++){
+            var pid = newlist[j].pid
+            console.log("id======="+id +"============pid=="+pid)
+            console.log(id == pid)
+            if(id == pid){
+                newlist[i].Nodes.Add(newlist[j]);
+            }
+        }
+    }
+    var OrgShows=new OrgShow(a);
+    OrgShows.Top=50;
+    OrgShows.Left=50;
+    OrgShows.IntervalWidth=10;
+    OrgShows.IntervalHeight=20;
+    //OrgShows.ShowType=2;
+    //OrgShows.BoxHeight=100;
+    OrgShows.BoxTemplet="<div id=\"{Id}\" class=\"OrgBox\" onclick=\"CookieGroup()\"><img src=\"{EmpPhoto}\" /><span>{EmpName}</span></div>"
+    OrgShows.Run()
+</script>
+
+</body>
+</html>

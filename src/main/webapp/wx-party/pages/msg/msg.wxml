@@ -1,0 +1,23 @@
+<!-- 内容容器 -->
+<view class='container'>
+  <!-- 选项卡导航 -->
+  <view class='tab-nav-wrapper'>
+    <view class='tab-nav-wrapper'>
+      <view class='tab-nav'>
+        <text bindtap='tabSwitch' data-index='0' class='{{tabNav==0?"on":""}}'>最新</text><text bindtap='tabSwitch' data-index='1' class='{{tabNav==1?"on":""}}'>未读</text><text bindtap='tabSwitch' data-index='2' class='{{tabNav==2?"on":""}}'>已读</text>
+      </view>
+    </view>
+  </view>
+  <!-- 通知列表 -->
+  <view class='msg-list'>
+    <block wx:for='{{msgData}}' wx:key='unique'>
+      <view class='msg-list-item' bindtap='readEvent' data-title='{{item.title}}' data-id='{{item.id}}'>
+        <view class='item-title'>
+          <text class='status {{item.isread===0?"":"on"}}'>{{item.isread===0?"未读":"已读"}}</text>{{item.title}}
+        </view>
+        <text class='time'>{{item.time}}</text>
+      </view>
+    </block>
+    <view class='none'>没有更多消息了...</view>
+  </view>
+</view>

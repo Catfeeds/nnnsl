@@ -1,0 +1,156 @@
+@layout("/common/_curd/_container.html"){
+<style>
+	th{
+		text-align:center;
+	}
+	.ui-jqgrid tr.jqgrow td {
+		white-space: normal !important;
+		height:auto;
+		vertical-align:center;
+		padding-top:2px;
+	}
+	.inner{
+		display: flex;
+		width:100%;
+		height: 200px;
+		/*border:1px solid red;*/
+		justify-content: center;
+	}
+	.item{
+		width:auto;
+		height: 200px;
+
+		border:1px solid blue;
+		text-align: center;
+		line-height: 200px;
+	}
+	.item span{
+		font-size: 25px;
+	}
+	.img{
+		width: 100px;
+		height: 200px;
+		line-height: 200px;
+		text-align: center;
+
+	}
+	.img img{
+		width: 1000px;
+		height: 200px;
+	}
+	.lct{
+		width:100%;
+		height: 100%;
+		text-align: center;
+	}
+
+
+	.content{
+		width: 100%;
+		height: 100%;
+	}
+	.men{
+		width: 100%;
+		height: 100%;
+		display: flex;
+	}
+	.read{
+		border:2px solid greenyellow;
+		border-radius: 20%;
+		width: 10%;
+		height: 100px;
+		text-align: center;
+		line-height: 100px;
+		margin-top:30px ;
+		margin-bottom: 30px;
+	}
+	.noread{
+		margin-top:30px ;
+		margin-bottom: 30px;
+		margin-left: 30px;
+		border:2px solid red;
+		border-radius: 20%;
+		width: 10%;
+		height: 100px;
+		text-align: center;
+		line-height: 100px;
+	}
+
+
+</style>
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = ["", 
+						"文件名",
+						"fid",
+						"审批人",
+						"审批时间",
+						"是否通过", 
+						"审核意见"
+		];
+		var _colmodel = [{name:"id", index:"id",hidden:true, width:100},
+						{name:"fname", index:"fname", width:150},
+           				 {name:"f_id", index:"f_id",hidden:true, width:100},
+						{name:"uname", index:"uname", width:60},
+						{name:"date", index:"date", width:60},
+						{name:"pass", index:"pass",hidden:true, width:40},
+						{name:"opinion", index:"opinion", width:200},
+						];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id",
+				where:"{f_id:"+${fid}+"}",
+				order : "desc"}
+		});
+
+
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 按钮 -->
+			<div class="content">
+				<div class="men">
+					@for(r in readnames){
+					<div class="read">
+						<span>${r!}</span>
+					</div>
+					@}
+					@for(r in noreadnames){
+					<div class="noread">
+						<span>${r!}</span>
+					</div>
+					@}
+
+				</div>
+			</div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+
+@}	

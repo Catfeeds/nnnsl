@@ -1,0 +1,135 @@
+<link rel="stylesheet" href="${basePath}/static/assets/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/static/style/css/car_mobil.css"  media="screen and (min-width: 300px) and (max-width: 1000px)">
+<link rel="stylesheet" type="text/css" href="/static/style/css/car_pc.css"  media="screen and (min-width: 1000px)">
+<div id="focus"></div>
+<div class="outer">
+	<div class="hid" >
+		<span id="num"></span>
+		<input type="hidden" value="" id="cid">
+		<input type="text" class="form-control inp" id="place" placeholder="填写目的地"/>
+		<button id="subm" class="btn btn-primary">确定</button>
+	</div>
+
+	<div class="hid" id="setstatus">
+		<input type="hidden" value="" id="carid">
+		<input type="hidden" value="" id="carnum">
+		<input type="hidden" value="" id="carstatus">
+		<div>
+			<button class="btn btn-warning btn-lg" id="carstart" onclick="starts()">出车</button><br/>
+		</div>
+		<div>
+			<button class="btn btn-success btn-lg" id="carover" onclick="over()">还车</button><br/>
+		</div>
+
+		<div>
+			<button class="btn btn-danger btn-lg" id="fix" onclick="service()">维修</button>
+		</div>
+		<div id="start" class="hid"><input placeholder="填写目的地" type="text" id="cause" value=""/><button onclick="subm()">确定</button></div>
+	</div>
+	@for(car in allcar){
+		<div class="inner" onclick="choose('${car.num}','${car.id}','${car.status}')">
+			<div class="statu${car.status!}">
+				<span class="stspan">${car.ss}</span>
+			</div>
+			<div class="up"><span>${car.num!}</span></div>
+			<div class="down"><span>${car.name!}</span></div>
+		</div>
+	@}
+
+</div>
+
+<script>
+    window.onload = function () {
+		$('body').click(function(){
+		    if($('#setstatus').attr("class") === "show"){
+		        $('#setstatus').hide()
+			}
+		})
+
+    	$("#subm").click(function(){
+            var ajaxURL = "/carslog/save";
+            var ajaxData = {
+                "nsl_carslog.c_id":$('#cid').val(),
+				"nsl_carslog.cause":$('#place').val()
+            }
+            $.post(ajaxURL,ajaxData,function (res) {
+                // layer.msg(res.message)
+				$('#focus').focus()
+                window.location.reload()
+            });
+        });
+
+        // $('body,html').animate({scrollTop:0},1000); return false;
+
+    }
+</script>
+<script>
+    service = function(){
+        var ajaxURL = "/cars/update";
+        var ajaxData = {
+            "nsl_cars.id":$('#carid').val(),
+            "nsl_cars.status":3
+        }
+        $.post(ajaxURL,ajaxData,function (res) {
+            window.location.reload()
+        });
+    }
+	over = function(){
+        var ajaxURL = "/cars/update";
+        var ajaxData = {
+            "nsl_cars.id":$('#carid').val(),
+            "nsl_cars.status":1
+        }
+        $.post(ajaxURL,ajaxData,function (res) {
+            window.location.reload()
+        });
+	}
+	starts = function(){
+	    $('#start').attr("class","show")
+		$('#cause').focus()
+	}
+	subm = function(){
+	    console.log("11111111")
+        var ajaxURL = "/carslog/save";
+        var ajaxData = {
+            "nsl_carslog.c_id":$('#carid').val(),
+            "nsl_carslog.cause":$('#cause').val()
+        }
+        $.post(ajaxURL,ajaxData,function (res) {
+            window.location.reload()
+        });
+	}
+
+	choose = function (num,id,status) {
+	    console.log(status)
+        // if(status === "1"){
+         //    $('#choosecar').attr("class","show")
+         //    $('#num').text(num)
+         //    $('#cid').val(id)
+         //    $("#place").focus();
+         //    // $("#place").blur(function(){
+         //    //     $('#choosecar').attr("class","hid")
+         //    // });
+		// }else{
+
+			$('#carid').val(id)
+			$('#carnum').val(num)
+			$('#carstatus').val(status)
+            var div = $("#setstatus");
+            if (div.is(":hidden")) {
+                div.show();
+                div.css("left", document.body.scrollLeft + event.clientX + 1);
+                div.css("top", document.body.scrollLeft + event.clientY + 10);
+            } else {
+                div.hide();
+            }
+		// }
+
+    }
+
+
+</script>
+
+<script src='${basePath}/static/assets/js/jquery.js'></script>
+<!--<script src="${basePath}/static/layer/layer.js"></script>-->
+

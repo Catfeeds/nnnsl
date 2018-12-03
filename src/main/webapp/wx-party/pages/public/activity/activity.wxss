@@ -1,0 +1,18 @@
+page{background-color: #EEE;}
+.container .act-list{padding-top: 125rpx;}
+.container .tab-nav-wrapper{
+  width: 100%;
+  z-index: 50!important;
+  white-space: nowrap;
+  height: 82rpx;
+  background: #fff;
+}
+.container .tab-nav-wrapper .nav-item{
+  display: inline-block;
+  width: 233rpx;
+  height: 80rpx;
+  color: #999;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  text-align: center;
+}

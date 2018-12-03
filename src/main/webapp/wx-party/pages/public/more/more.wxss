@@ -1,0 +1,57 @@
+page,.container{
+  min-height: 100%;
+  background-color: #F0EFF4;
+}
+.container > image{
+  display: block;
+  width: 100%;
+  height: 360rpx;
+}
+.container .more-model{
+  background-color: #fff;
+  border-top: 2rpx solid #ddd;
+  border-bottom: 2rpx solid #ddd;
+}
+.container .more-model .title{
+  position: relative;
+  font-size: 34rpx;
+  color: #333;
+  padding: 20rpx 0 20rpx 56rpx;
+  border-bottom: 1rpx solid #ddd;
+}
+.container .more-model .title::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 30rpx;
+  width: 8rpx;
+  height: 40rpx;
+  background-color: #E83C3C;
+}
+.container .more-model .list{
+  display: flex;
+  width: 90%;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 15rpx 0 20rpx; 
+  justify-content: flex-start;
+}
+.container .more-model .list > view{
+  width: 24.8%;
+  text-align: center;
+  font-size: 24rpx;
+  color: #333;
+  padding: 15rpx 0;
+}
+.container .more-model .list > view text{
+  display: block;
+  width: 90rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 42rpx;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  margin: 0 auto 15rpx;
+}

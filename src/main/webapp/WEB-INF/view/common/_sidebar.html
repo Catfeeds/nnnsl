@@ -1,0 +1,63 @@
+
+
+			<!-- #section:basics/sidebar -->
+			<div id="sidebar" class="sidebar responsive">
+				<script type="text/javascript">
+					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+					$(function(){
+						$('.submenu').attr("style","display: block;");
+						$("#sidebar").css({"max-height":$(window).height()-130,"overflow-y":"auto","overflow-x":"hidden"});
+					});
+						
+				    $(window).resize(function () {
+						$("#sidebar").css({"max-height":$(window).height()-130,"overflow-y":"auto","overflow-x":"hidden"});
+				    });
+				</script>
+
+				<ul id="sidebar_container" class="nav nav-list">
+					<li id="sidebar_home">
+						<a href="javascript:openPerson();">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> 欢迎 ${shiro.getUser().name}  </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					<li id="sidebar_add">
+						<a href="#" data-url="/files/add" data-addtabs="filesadd" data-title="发起文件审批" data-icon="fa fa-book" >
+							<i class="menu-icon fa fa-book"></i>
+							<span class="menu-text"> 发起文件审批 </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+					<li id="casher_add">
+						<a href="#" data-url="/casher/add" data-addtabs="casheradd" data-title="发起报销审批" data-icon="fa fa-btc" >
+							<i class="menu-icon fa fa-btc"></i>
+							<span class="menu-text"> 发起报销审批 </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+					@if(shiro.hasAnyRoles("administrator, carman")){
+						<li id="casher_add">
+							<a href="#" data-url="/cars/choose" data-addtabs="car" data-title="车辆派送" data-icon="fa fa-car" >
+								<i class="menu-icon fa fa-car"></i>
+								<span class="menu-text"> 车辆派送 </span>
+							</a>
+							<b class="arrow"></b>
+						</li>
+					@}
+
+
+					<blade:sidebar userId="${shiro.getUser().id}" roleId="${shiro.getUser().roles}" />
+					
+				</ul>
+				<!-- #section:basics/sidebar.layout.minimize -->
+				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
+
+		 		<script src="${basePath}/static/layer/layer.js"></script>
+			</div>

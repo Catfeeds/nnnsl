@@ -1,0 +1,26 @@
+<!-- 内容容器 -->
+<view class='container'>
+  <!-- 选项卡导航 -->
+  <view class='tab-nav-wrapper'>
+    <view class='tab-nav'>
+      <text bindtap='tabSwitch' data-index='0' class='{{tabNav==0?"on":""}}'>最新投票</text><text bindtap='tabSwitch' data-index='1' class='{{tabNav==1?"on":""}}'>我参与的</text>
+    </view>
+  </view>
+  <!-- 通知列表 -->
+  <view class='act-list'>
+    <block wx:for='{{voteData}}' wx:key='unique'>
+      <view bindtap='seeDetail' data-id='{{item.id}}' class='act-list-item'>
+        <view class='item-title'>
+          <text class='status {{item.isover===1?"over":(item.take===1?"on":"")}}'>{{item.isover===1?"已截止":(item.take===1?"已参与":"未参与")}}</text>{{item.title}}
+        </view>
+        <view class='item-tip'>
+          <view class='clearfix item-info'>
+            <text class='time'>投票截止时间：{{item.dead_line}}</text>
+            <text class='num'>{{item.people}}人已参与</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class='none'>没有更多的投票了...</view>
+</view>

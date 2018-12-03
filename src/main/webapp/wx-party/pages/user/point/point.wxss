@@ -1,0 +1,69 @@
+Page,.container {
+  min-height: 100%;
+  background-color: #F5F5F5;
+}
+.container .branch-title{
+  position: relative;
+  font-size: 34rpx;
+  color: #333;
+  background-color: #fff;
+  padding: 20rpx 0 20rpx 50rpx;
+  border-bottom: 1rpx solid #ddd;
+}
+.container .branch-title::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 30rpx;
+  width: 8rpx;
+  height: 50rpx;
+  background-color: #E83C3C;
+}
+.container .branch-list {
+  margin-bottom: 40rpx;
+  background-color: #fff;
+}
+.container .branch-list .list-item{
+  position: relative;
+  padding: 0 20rpx;
+  font-size: 34rpx;
+  line-height: 80rpx;
+  color: #333;
+  border-bottom: 1rpx solid #ddd;
+}
+.container .branch-list .point-box{
+  display: flex;
+  border-top: 1rpx dashed #ddd;
+}
+.container .branch-list .star-list{
+  width: 60%;
+  display: flex;
+  flex: 1;
+}
+.container .branch-list .star-list .star-img{
+  position: relative;
+  padding: 15rpx 0;
+  width: 50rpx;
+  height: 50rpx;
+  margin: 0 10rpx;
+}
+.container .branch-list .star-list .star-img .img{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 25rpx;
+  height: 50rpx;
+}
+.container .branch-list .btn-box .point{
+  font-size: 34rpx;
+  color: #E83C3C;
+  margin-right: 20rpx;
+}
+.container .branch-list .btn-box .btn{
+  color: #fff;
+  font-size: 32rpx;
+  padding: 5rpx 15rpx;
+  background-color: #E83C3C;
+  border-radius: 10rpx;
+}

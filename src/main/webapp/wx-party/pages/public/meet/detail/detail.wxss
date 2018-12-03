@@ -1,0 +1,48 @@
+.container > .detail-content{padding:25rpx 30rpx 10rpx;}
+.container > .detail-content .statement{
+  font-size: 26rpx;
+  color: #666;
+  border-bottom: 1rpx solid #ddd;
+  padding: 15rpx 0;
+}
+.container > .detail-content .meet-info{
+  line-height: 60rpx;
+  font-size: 24rpx;
+  color: #333;
+  padding: 15rpx 0 20rpx;
+}
+.container > .detail-content .meet-info text{
+  color: #040404;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.container > .detail-content .meet-btn{
+  display: flex;
+  padding: 0 30rpx;
+  margin: 0 auto 40rpx;
+  justify-content: space-around;
+}
+.container > .detail-content .meet-btn text{
+  width: 280rpx;
+  height: 80rpx;
+  color: #fff;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 10rpx;
+}
+.container > .detail-content text.sign{background-color: #5BB85D;}
+.container > .detail-content text.leave{background-color: #EEAC4E;}
+.container > .detail-content .people .people-tit{
+  display: flex;
+  color: #666;
+  font-size: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid #ddd;
+}
+.container > .detail-content .people .people-tit .iconfont{font-size: 24rpx;}
+.container > .detail-content .people .people-con{
+  padding: 25rpx 0 0;
+  font-size: 28rpx;
+  color: #A4A4A4;
+}
+.container > .title-tip{font-size: 30rpx;}

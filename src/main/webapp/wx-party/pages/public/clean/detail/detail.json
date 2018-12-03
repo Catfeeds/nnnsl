@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "反腐倡廉",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "toast": "/component/toast/toast"
+  }
+}

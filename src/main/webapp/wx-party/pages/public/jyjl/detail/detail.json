@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "经验交流",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "toast": "/component/toast/toast"
+  }
+}

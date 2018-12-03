@@ -1,0 +1,22 @@
+<view class='container'>
+  <!-- 选项卡导航 -->
+  <view class='tab-nav-wrapper'>
+    <view class='tab-nav'>
+      <text bindtap='tabSwitch' data-index='0' class='{{tabNav==0?"on":""}}'>最新活动</text><text bindtap='tabSwitch' data-index='1' class='{{tabNav==1?"on":""}}'>我参与的</text>
+    </view>
+  </view>
+  <view class='act-list'>
+    <block wx:for='{{actData}}' wx:key='unique'>
+      <view bindtap='seeDetail' data-id='{{item.id}}' class='act-list-item'>
+        <view class='item-title'>
+          <text class='status {{item.isover?"over":(item.isattend?"on":"")}}'>{{item.isover?"已截止":(item.isattend?"已报名":"未报名")}}</text>{{item.theme}}
+        </view>
+        <view class='clearfix item-tip'>
+          <text class='time'>报名截止时间：{{item.close_time}}</text>
+          <text class='num'>{{item.people}}人已报名</text>
+        </view>
+      </view>
+    </block>
+    <view class='none'>没有更多的活动了...</view>
+  </view>
+</view>

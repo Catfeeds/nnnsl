@@ -1,0 +1,79 @@
+.container .title{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: auto;
+  margin: auto;
+  z-index: 10;
+  display: flex;
+  color: #666;
+  font-size: 26rpx;
+  border-bottom: 2rpx solid #ddd;
+  background-color: #fff;
+}
+.container .title-item{
+  flex: 1;
+  position: relative;
+  text-align: center;
+  padding: 20rpx;
+}
+.container .title-item::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 110rpx;
+  height: 4rpx;
+}
+.container .title-item.on{color: #E83C3C;}
+.container .title-item.on::before{background-color: #E83C3C;}
+.container .pay-list{padding-top: 86rpx;}
+.container .pay-list .pay-list-item{
+  padding: 30rpx 35rpx;
+  background-color: #fff;
+  border-bottom: 2rpx solid #ddd;
+}
+.container .pay-list .item-title{
+  vertical-align: middle;
+  color: #333;
+  font-size: 30rpx;
+  line-height: 30rpx;
+  margin-bottom: 30rpx;
+  overflow : hidden;
+}
+.container .pay-list .item-title > text{
+  float: left;
+  width: 100rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  color: #fff;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  margin-right: 20rpx;
+  background-color: #F5BE41;
+}
+.container .pay-list .item-title > text.over{background-color: #999;}
+.container .pay-list .item-title > text.on{background-color: #5BB85D;}
+.container .pay-list .item-tip {
+  position: relative;
+  font-size: 26rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  color: #999;
+}
+.container .pay-list .item-tip .pay-btn{
+  position: absolute;
+  right: 5rpx;
+  bottom: 0;
+  text-align: center;
+  width: 100rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 10rpx;
+  background-color:#E83C3C; 
+}

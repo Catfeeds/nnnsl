@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "专题论坛",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "toast": "/component/toast/toast"
+  }
+}

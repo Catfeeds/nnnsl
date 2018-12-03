@@ -1,0 +1,75 @@
+<style>
+	.outer{
+		height: 100%;
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.inner{
+		margin: 20px;
+		height: 120px;
+		width:200px;
+		border:1px solid greenyellow;
+		border-radius: 5px;
+	}
+	.up{
+		height: 80px;
+		width: 100%;
+		line-height: 80px;
+	}
+	.up span{
+		font-size: 30px;
+		text-align: center;
+	}
+	.down{
+		height: 20px;
+		width: 100%;
+		line-height: 20px;
+		text-align: right;
+	}
+	.down span{
+		width: 60px;
+		display: block;
+		float: right;
+		text-align: center;
+		background-color: #00a0e9;
+	}
+	.statu1{
+		width: 60px;
+		height: 20px;
+		background-color: #00B83F;
+		text-align: center;
+	}
+	.statu2,.statu3,.statu4{
+		width: 60px;
+		height: 20px;
+		background-color: #b80023;
+		text-align: center;
+	}
+	.stspan{
+		text-align: center;
+		color: white;
+	}
+</style>
+
+<div class="outer">
+	@for(car in allcar){
+		<div class="inner" onclick="choose('${car.num}','${car.id}')">
+			<div class="statu${car.status!}">
+				<span class="stspan">${car.ss}</span>
+			</div>
+			<div class="up"><span>${car.num!}</span></div>
+			<div class="down"><span>${car.name!}</span></div>
+		</div>
+	@}
+
+</div>
+
+<script>
+	choose = function (num,id) {
+	    parent.$('#_cname').val(num)
+        parent.$('#_c_id').val(id)
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index); //再执行关闭
+    }
+</script>

@@ -1,0 +1,4 @@
+<!--component/toast.wxml-->
+<view class='toast-out' wx:if="{{isShow}}">
+  <view class='t-content'>{{content}}</view>
+</view>

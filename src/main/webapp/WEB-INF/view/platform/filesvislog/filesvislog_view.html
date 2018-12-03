@@ -1,0 +1,23 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+			
+@			  {name:"", index:"id", type:"text",newline:true,length:8},
+		@			  {name:"文件", index:"f_id", type:"text",newline:true,length:8},
+		@			  {name:"增加可见人", index:"visible", type:"text",newline:true,length:8},
+		@			  {name:"操作人", index:"u_id", type:"text",newline:true,length:8},
+		@			  {name:"操作前", index:"befor", type:"text",newline:true,length:8},
+		@			  {name:"操作后", index:"after", type:"text",newline:true,length:8},
+		@			  {name:"操作时间", index:"date", type:"text",newline:true,length:8},
+		@			  {name:"操作前(id)", index:"beforid", type:"text",newline:true,length:8},
+		@			  {name:"操作后(id)", index:"afterid", type:"text",newline:true,length:8}		
+		@		   ];
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

@@ -1,0 +1,18 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+		@			  {name:"派车", index:"c_id", type:"text",newline:true,length:8},
+		@			  {name:"起始时间", index:"start", type:"text",newline:true,length:8},
+		@			  {name:"派车人", index:"p_id", type:"text",newline:true,length:8},
+		@			  {name:"乘客名字", index:"uname", type:"text",newline:true,length:8},
+		@			  {name:"派车原因", index:"cause", type:"text",newline:true,length:8}
+		@		   ];
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

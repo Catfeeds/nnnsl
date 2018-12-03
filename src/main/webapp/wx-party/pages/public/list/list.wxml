@@ -1,0 +1,66 @@
+<view class='box'>
+    <image src='/images/bgii.png' mode='scaleToFill'></image>
+  <view>
+    <view class='title'>支部排行</view>
+    <view class='content'>
+       <block wx:for='{{leftList}}' wx:if='{{index<leftPage}}' wx:key='unique'>
+        <view class='inline row'> 
+          <view class='num'>{{item.num}}</view>
+          <view class='text-box'>
+            <text>{{item.name}}</text>  
+            <text>{{item.count}}</text>  
+          </view>
+        </view>
+      </block> 
+      <!-- <view class='inline row'> 
+          <view class='num'>1</view>
+          <view class='text-box'>
+            <text>官林村支部</text>  
+            <text>556</text>  
+          </view>
+        </view>
+        <view class='inline row'> 
+          <view class='num'>1</view>
+          <view class='text-box'>
+            <text>都山村支部</text>  
+            <text>155</text>  
+          </view>
+        </view>-->
+    </view> 
+  </view>
+  <view>
+   <view class='title'>党员排行</view>
+    <view class='content'>
+       <block wx:for='{{rightList}}' wx:if='{{index<rightPage}}' wx:key='unique'>
+        <view class='inline row'> 
+          <view class='num'>{{item.num}}</view>
+          <view class='text-box'>
+            <text>{{item.name}}</text>  
+            <text>{{item.count}}</text>  
+          </view>
+        </view>
+      </block> 
+        <!-- <view class='inline row'> 
+          <view class='num'>1</view>
+          <view class='text-box'>
+            <text>管理员</text>  
+            <text>56</text>  
+          </view>
+        </view>
+        <view class='inline row'> 
+          <view class='num'>2</view>
+          <view class='text-box'>
+            <text>朱工</text>  
+            <text>19</text>  
+          </view>
+        </view>
+        <view class='inline row'> 
+          <view class='num'>3</view>
+          <view class='text-box'>
+            <text>陈海</text>  
+            <text>12</text>  
+          </view>
+        </view> -->
+    </view>
+  </view>
+</view>

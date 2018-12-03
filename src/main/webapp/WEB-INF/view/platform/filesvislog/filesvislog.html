@@ -1,0 +1,75 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = ["", 
+						"文件", 
+						"增加可见人", 
+						"操作人", 
+						"操作前", 
+						"操作后", 
+						"操作时间", 
+						"操作前(id)", 
+						"操作后(id)"];
+		var _colmodel = [{name:"id", index:"id", width:100},
+						{name:"f_id", index:"f_id", width:100},
+						{name:"visible", index:"visible", width:100},
+						{name:"u_id", index:"u_id", width:100},
+						{name:"befor", index:"befor", width:100},
+						{name:"after", index:"after", width:100},
+						{name:"date", index:"date", width:100},
+						{name:"beforid", index:"beforid", width:100},
+						{name:"afterid", index:"afterid", width:100}];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id", order : "desc"}
+		});
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+@		{name:"", index:"id", type:"text"},
+			@		{name:"文件", index:"f_id", type:"text"},
+			@		{name:"增加可见人", index:"visible", type:"text"},
+			@		{name:"操作人", index:"u_id", type:"text"},
+			@		{name:"操作前", index:"befor", type:"text"},
+			@		{name:"操作后", index:"after", type:"text"},
+			@		{name:"操作时间", index:"date", type:"text"},
+			@		{name:"操作前(id)", index:"beforid", type:"text"},
+			@		{name:"操作后(id)", index:"afterid", type:"text"}							
+			@];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

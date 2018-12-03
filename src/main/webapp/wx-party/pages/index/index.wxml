@@ -1,0 +1,149 @@
+<view class='container'>
+  <view class='index-wrapper'>
+    <!-- 图文swiper轮播 -->
+    <view class='swiper-wrapper'>
+      <swiper autoplay='auto' circular='true' class='index-swiper' current='0' bindchange='swiperChange'>
+        <block wx:for='{{swiperData}}' wx:key='unique'>
+          <swiper-item bindtap='toModel' data-page='{{item.page}}'>
+            <image mode='scaleToFill' src='{{item.src?item.src:defaultImg}}' binderror="SwiperImgError" data-errorimg="{{index}}"></image>
+            <view>{{item.text}}</view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class='clearfix swiper-nav'>
+        <block wx:for='{{swiperData}}' wx:key='unique'>
+          <text class='{{index===swiperNow?"on":""}}'></text>
+        </block>
+      </view>
+    </view>
+    <!-- 首页导航 -->
+    <view class='index-nav'>
+
+
+    <block wx:for='{{menuData}}' wx:key='unique'>
+        <view bindtap='toModel' data-page='{{item.mark}}'>
+          <text style='background-color:{{item.bgcolor}};' class='iconfont {{item.icon}}'></text>{{item.name}}
+          </view>
+        </block>
+
+
+      <!-- <view bindtap='toModel' data-page='class'>
+        <image mode='scaleToFill' src='../../images/class.png'></image>为您上课
+      </view>
+      <view bindtap='toModel' data-page='meet'>
+        <image mode='scaleToFill' src='../../images/meet.png'></image>请您开会
+      </view>
+      <view bindtap='toModel' data-page='advice'>
+        <image mode='scaleToFill' src='../../images/advice.png'></image>请您提议
+      </view>
+      <view bindtap='toModel' data-page='act'>
+        <image mode='scaleToFill' src='../../images/activity.png'></image>请您参与
+      </view>
+      <view bindtap='toModel' data-page='vote'>
+        <image mode='scaleToFill' src='../../images/vote.png'></image>投票调研
+      </view>
+      <view bindtap='toModel' data-page='task'>
+        <image mode='scaleToFill' src='../../images/task.png'></image>任务管理
+      </view>
+      <view bindtap='toModel' data-page='notice'>
+        <image mode='scaleToFill' src='../../images/notice.png'></image>通知公告
+      </view>
+      <view bindtap='toModel' data-page='more'>
+        <image mode='scaleToFill' src='../../images/more.png'></image>更多应用
+      </view> -->
+    </view>
+    <!-- 党建要闻 -->
+    <block wx:for='{{listData}}'   wx:key='unique'>
+      <view class='inline index-model'>
+        <view class='title' bindtap='toModel' data-page='{{item.type}}'>{{item.name}}<text class='iconfont icon-more'>更多</text></view>
+        <view class='news-list'>
+          <block wx:for='{{item.titlelist}}' wx:for-item='xxx' wx:key='unique'>
+            <view bindtap='see{{item.type}}Detail' data-id='{{xxx.id}}' class='news-list-item'>
+              <view class='news-img'>
+                <image mode='scaleToFill' src='{{xxx.cover?"http://www.yxzhdj.com/upload/"+xxx.cover:defaultImg}}' binderror="NewsImgError" data-errorimg="{{index}}"></image>
+              </view>
+              <view class='news-content'>
+                <view>{{xxx.title}}</view>
+                <text>{{xxx.creat_time}}</text>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+    <!-- 反腐动态 -->
+    <!-- <view class='inline index-model'>
+      <view class='title' bindtap='toModel' data-page='clean'>反腐倡廉<text class='iconfont icon-more'>更多</text></view>
+      <view class='clean-list'>
+        <block wx:for='{{cleanData}}' wx:key='unique'>
+          <view bindtap='seeCleanDetail' data-id='{{item.id}}' class='clean-list-item'>
+            <view class='item-left'>
+              <text class='month'>{{item.month}}</text>
+              <view class='day'>{{item.day}}</view>
+            </view>
+            <view class='item-right'>
+              <view class='clean-title'>{{item.title}}</view>
+              <text class='clean-tip type'>反腐动态</text>
+            </view>
+          </view>
+        </block> 
+      </view>
+    </view> -->
+    <!-- 党内活动 -->
+    <!-- <view class='inline index-model'>
+      <view class='title' bindtap='toModel' data-page='activity'>党内活动<text class='iconfont icon-more'>更多</text></view>
+      <view class='act-list'>
+        <block wx:for='{{actData}}' wx:key='unique'>
+          <view bindtap='seeActDetail' data-id='{{item.id}}' class='act-list-item'>
+            <view class='item-title'>
+              <text class='status {{item.isover?"over":(item.isattend?"on":"")}}'>{{item.isover?"已截止":(item.isattend?"已报名":"未报名")}}</text>{{item.theme}}
+            </view>
+            <view class='clearfix item-tip'>
+              <text class='time'>报名截止时间：{{item.close_time}}</text>
+              <text class='num'>{{item.people}}人已报名</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view> -->
+    <!-- 在线课程 -->
+    <!-- <view class='inline index-model'>
+      <view class='title' bindtap='toModel' data-page='class'>在线课程<text class='iconfont icon-more'>更多</text></view>
+      <view class='class-list'>
+        <block wx:for='{{classData}}' wx:key='unique'>
+          <view bindtap='seeClassDetail' data-id='{{item.id}}' class='class-item'>
+            <view class='class-img'>
+              <image mode='scaleToFill' src='{{item.url?item.url:defaultImg}}' binderror="ClassImgError" data-errorimg="{{index}}"></image>
+            </view>
+            <view class='class-info'>
+              <view class='class-title'>{{item.title}}</view>
+              <view class='class-tip'>
+                <text class='class-time'>{{item.create_time}}</text>
+                <text class='class-num'>{{item.people}}人已学习</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view> -->
+    <!-- 投票调研 -->
+    <!-- <view class='inline index-model'>
+      <view class='title' bindtap='toModel' data-page='vote'>投票调研<text class='iconfont icon-more'>更多</text></view>
+      <view class='act-list'>
+        <block wx:for='{{voteData}}' wx:key='unique'>
+          <view bindtap='seeVoteDetail' data-id='{{item.id}}' class='act-list-item'>
+            <view class='item-title'>
+              <text class='status {{item.isover===1?"over":(item.take===1?"on":"")}}}'>{{item.isover===1?"已截止":(item.take===1?"已参与":"未参与")}}</text>{{item.title}}
+            </view>
+            <view class='item-tip'>
+              <view class='clearfix item-info'>
+                <text class='time'>投票截止时间：{{item.dead_line}}</text>
+                <text class='num'>{{item.people}}人已参与</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view> -->
+  </view>
+</view>

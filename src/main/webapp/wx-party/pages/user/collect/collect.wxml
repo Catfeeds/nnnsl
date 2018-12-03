@@ -1,0 +1,17 @@
+<view class='container'>
+    <!-- 收藏列表 -->
+    <view class='collect-wrapper'>
+      <block wx:for='{{collectData}}' wx:key='unique'>
+        <view bindtap='seeDetail' data-id='{{item.e_id}}' data-item='{{item.item}}' class='collect-item'>
+          <view class='item-img'>
+            <image mode='scaleToFill' src='{{item.cover}}'></image>
+          </view>
+          <view class='item-content'>
+            <view>{{item.title?item.title:""}}</view>
+            <text>{{item.attend_date?item.title:""}}</text>
+          </view>
+        </view>
+      </block>
+      <view class='none'>没有更多记录了...</view>
+    </view>
+</view>

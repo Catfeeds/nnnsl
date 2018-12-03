@@ -1,0 +1,81 @@
+.container .title{
+  padding: 30rpx 30rpx 35rpx;
+  border-bottom: 2rpx solid #ddd;
+  box-shadow: 0 0 20rpx #ddd;
+}
+.container .title .img-box{
+  float: left;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  border: 3rpx solid #E83C3C;
+}
+ .container .title .img-box > image{
+  width: 100%;
+  height: 100%;
+}
+.container .title .title-content{
+  position: relative;
+  height: 100rpx;
+  padding: 0 20rpx;
+}
+.container .title .title-content .modify-head,
+.container .title .title-content .login-out{
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #888;
+  width: 150rpx;
+  text-align: center;
+  line-height: 42rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 8rpx;
+  padding-left: 35rpx;
+  font-size: 28rpx;
+}
+.container .title .title-content .login-out{
+  top: auto;
+  bottom: 0;
+}
+.container .title .title-content .modify-head::before,
+.container .title .title-content .login-out::before{
+  position: absolute;
+  left: 15rpx;
+  font-size: 26rpx;
+}
+.container .title .title-content view{
+  font-size: 34rpx;
+  color: #333;
+}
+.container .title .title-content text{
+  font-size: 28rpx;
+  color: #666;
+}
+.container .user-tool{
+  padding-left: 50rpx;
+  border-top: 2rpx solid #ddd;
+  border-bottom: 2rpx solid #ddd;
+  box-shadow: 0 0 20rpx #ddd;
+}
+.container .user-tool .tool-item{
+  position: relative;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 36rpx;
+  color: #666;
+  overflow: hidden;
+}
+.container .user-tool .tool-item text{
+  color: #E83C3C;
+  font-size: 36rpx;
+  margin-right: 20rpx;
+}
+.container .user-tool .tool-item text.icon-more{
+  position: absolute;
+  right: 8rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 26rpx;
+}
+.container .user-tool .tool-item:not(:last-child){border-bottom: 1rpx dashed #ddd;}

@@ -1,0 +1,25 @@
+<view class='container'>
+  <!-- 标题部分 -->
+  <view class='title-wrapper'>
+    <view class='title'>{{detail.title}}</view>
+    <view class='clearfix title-tip'>
+      <view class='time'>截止时间: {{detail.dead_line}}</view>
+      <view class='num'>参与人数：{{detail.people}}</view>
+    </view>
+    <view class='propose'>{{detail.description?detail.description:""}}</view>
+  </view>
+  <!-- 问卷调查列表 -->
+  <view class='question-list'>
+      <checkbox-group class='list-item' bindchange="checkboxChange">
+        <label class="list-option" wx:for-items="{{detail.stitle}}" wx:key='key'>
+            <checkbox value="{{item.id}}"/>{{item.title}}
+        </label>
+      </checkbox-group>
+  </view>
+  <!-- 提交 -->
+  <view class='bottom-wrapper'>
+    <button wx:if='{{isNoSubmit}}' bindtap='submitSelect'>提交</button>
+    <button bindtap='seeResult' class='{{isSeeResult?"":"over"}}'>{{btnText}}</button>
+  </view>
+  <toast id='toast'>{{content}}</toast>
+</view>

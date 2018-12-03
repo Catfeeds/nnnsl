@@ -1,0 +1,136 @@
+@layout("/common/_curd/_container.html"){
+<script type="text/javascript">
+	var ctx="${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	var export_source = "user.oraclelist";
+	if("${func.isMySql()}" == "true"){
+		export_source = "user.mysqllist";
+	}
+	
+	$(function(){
+		initGrid();
+		initZtree();
+		initMenuBtn("btns","${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx+"/${code}/list";//查询列表接口
+		var _colnames=[ "序列", "姓名","部门","部门", "邮箱"];
+		var _colmodel=[   {name:"ID",index:"ID", width:80,hidden:true},
+						  {name:"NAME",index:"NAME", width:80},
+						  {name:"DEPTNAME",index:"DEPTNAME", width:50},
+            {name:"DEPTID",index:"DEPTID", hidden:true,width:50},
+						  {name:"EMAIL",index:"EMAIL", width:120}
+						];
+		
+		jQuery(grid_selector).jqGrid({
+			url:grid_url,
+			//caption: "用户管理",
+		    shrinkToFit:true,//适用于较少字段,响应式
+			colNames:_colnames,
+			colModel:_colmodel, 
+			jsonReader:{id:"ID"},
+			pager : pager_selector,
+			postData: { sort: "DEPTID asc, account", order: "asc"}
+		});
+		
+
+	}
+	
+	
+	function initZtree(){
+		var setting = {
+				data: {
+					simpleData: {
+						enable: true
+					}
+				}
+			};
+		$.post("${basePath}/user/userTreeList", function(data){
+			if(data.code===0){
+				$.fn.zTree.init($("#zTree"), setting, data.data);
+			}
+			else{
+				layer_alert("数据加载失败", "error");
+			}
+		}, "json");
+	}
+	
+</script>
+
+
+	<!-- 配置grid -->
+	<div class="row">
+		<!--<div class="col-sm-3">-->
+			<!--<div class="widget-box widget-color-blue2">-->
+				<!--<div class="widget-header">-->
+					<!--<h4 class="widget-title lighter smaller">部门组织架构</h4>-->
+				<!--</div>-->
+
+				<!--<div class="widget-body">-->
+					<!--<div class="widget-main padding-8">-->
+						<!--<ul id="zTree" class="ztree"></ul>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置查询 -->
+			@ var _col=[
+			@		  	{name:"账户",index:"ACCOUNT",type:"text"},
+			@		  	{name:"姓名",index:"NAME",type:"text"},
+			@		  	{name:"性别",index:"SEX",type:"select_101"},
+			@		 	{name:"邮箱",index:"EMAIL",type:"text"},
+			@		  	{name:"电话",index:"PHONE",type:"text"},
+			@			{name:"状态",index:"STATUS",type:"select_901"}
+			@		   ];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- 按钮组 -->
+			<a class="btn btn-success" onclick="userchoose()">确定</a>
+			<!--<div class="welljq well-sm" id="btns"></div>-->
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页 -->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<!-- 引入列表页所需js -->
+	@include("/common/_listscript.html"){}
+	<link rel="stylesheet" href="${basePath}/static/zTree/css/zTreeStyle/zTreeStyle.css" />
+	<script src="${basePath}/static/zTree/js/jquery.ztree.core.js" type="text/javascript" ></script>
+	<style type="text/css">
+		.ztree li span.button.iconPerson_ico_docu{margin-right:2px; background: url(${basePath}/static/zTree/img/person.png) no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle}
+	</style>
+
+<script>
+
+
+	userchoose = function () {
+            var ids = $("#grid-table").jqGrid("getGridParam", "selarrrow");
+        	var who = '${who}'
+            var name = ""
+		console.log(who)
+            $.each(ids,function (index, id){
+                var row = $("#grid-table").jqGrid('getRowData', id);
+                name =  name +" "+row.NAME;
+            })
+		console.log(name)
+		console.log(ids)
+		if(who === "leader"){
+            parent.document.getElementById("_visiable").value=ids;
+            parent.document.getElementById("_selectname").value=name;
+		}else if(who === "copy"){
+            parent.document.getElementById("_copyman").value=name;
+            parent.document.getElementById("_copy").value=ids;
+		}else if(who === "next"){
+            parent.document.getElementById("_next").value=name;
+            parent.document.getElementById("_nextid").value=ids;
+		}
+
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index); //再执行关闭
+    }
+</script>
+@}	

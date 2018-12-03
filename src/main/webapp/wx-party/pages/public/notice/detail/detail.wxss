@@ -1,0 +1,3 @@
+.container .detail-content{
+  padding: 25rpx 30rpx 10rpx;
+}

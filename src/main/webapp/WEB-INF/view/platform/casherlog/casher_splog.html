@@ -1,0 +1,302 @@
+@layout("/common/_curd/_container.html"){
+<style>
+	.inner{
+		display: flex;
+		width:100%;
+		height: 200px;
+		/*border:1px solid red;*/
+		justify-content: center;
+	}
+	.item{
+		width:auto;
+		height: 200px;
+
+		border:1px solid blue;
+		text-align: center;
+		line-height: 200px;
+	}
+	.item span{
+		font-size: 25px;
+	}
+	.img{
+		width: 100px;
+		height: 200px;
+		line-height: 200px;
+		text-align: center;
+
+	}
+	.img img{
+		width: 1000px;
+		height: 200px;
+	}
+	.lct{
+		width:100%;
+		height: 100%;
+		text-align: center;
+	}
+	.sptable{
+		width:100%;
+		border: 1px solid grey;
+	}
+	.review{
+		border:1px solid lightgrey;
+		margin-left: 30px;
+		padding:10px;
+
+	}
+	.reviewspan{
+		display: block;
+		margin-top: 10px;
+		border: 1px dotted lightblue;
+	}
+	.reviewdiv{
+		margin-bottom: 20px;
+	}
+
+	.casherimg img{
+		border: 1px solid grey;
+		margin-bottom: 10px;
+		width: 800px;
+
+	}
+</style>
+<!--<script type="text/javascript">-->
+	<!--var ctx = "${basePath}";-->
+	<!--var grid_selector = "#grid-table";-->
+	<!--var pager_selector = "#grid-pager";-->
+	<!---->
+	<!--$(function(){-->
+		<!--initGrid();-->
+		<!--initMenuBtn("btns", "${code}");-->
+	<!--});-->
+	<!---->
+	<!--function initGrid(){-->
+		<!--var grid_url = ctx + "/casherlog/list";-->
+		<!--var _colnames = ["",-->
+            			<!--"报销单号",-->
+						<!--"报销单", -->
+						<!--"审批人", -->
+						<!--"审批时间", -->
+						<!--"是否通过", -->
+						<!--"审批意见"-->
+		<!--];-->
+		<!--var _colmodel = [{name:"id", index:"id",hidden:true, width:100},-->
+            			<!--{name:"c_id", index:"c_id", hidden:true,width:100},-->
+						<!--{name:"cname", index:"cname", width:100},-->
+						<!--{name:"uname", index:"uname", width:100},-->
+						<!--{name:"date", index:"date", width:100},-->
+						<!--{name:"ispass", index:"ispass", width:100,formatter:function (value, row, index) {-->
+								<!--if(value===1){-->
+								    <!--return "待审核";-->
+								<!--}else if(value===2){-->
+                                    <!--return "驳回";-->
+                                <!--}else if(value===3){-->
+                                    <!--return "审核通过";-->
+                                <!--}else {-->
+								    <!--return "待审核";-->
+								<!--}-->
+                            <!--}},-->
+						<!--{name:"opinion", index:"opinion", width:100}-->
+						<!--];-->
+		<!---->
+		<!--jQuery(grid_selector).jqGrid({-->
+			<!--url : grid_url,-->
+		    <!--shrinkToFit : true,-->
+			<!--colNames : _colnames,-->
+			<!--colModel : _colmodel, -->
+			<!--jsonReader : {id :"id"},-->
+			<!--pager : pager_selector,-->
+			<!--postData : {sort : "id",-->
+				<!--where:"{c_id:"+$('#cid').val()+"}",-->
+				<!--order : "desc"}-->
+		<!--});-->
+	<!--}-->
+<!--</script>-->
+<input type="hidden" value="${cid!}" id="cid">
+<input type="hidden" value="" id="userid">
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			<!-- 按钮 -->
+
+
+
+
+			<!--<div class="welljq well-sm" id="btns"></div>-->
+			<!-- grid -->
+			<!--<table id="grid-table"></table>-->
+			<!-- 分页-->
+			<!--<div id="grid-pager"></div>-->
+
+
+			<div style="margin-bottom: 10px">
+				<span style="color: #0000cc">经&nbsp;办&nbsp;人：</span>
+				<span>${casher.uname!}</span>
+			</div>
+
+
+			<div style="margin-bottom: 10px">
+				<span style="color: #0000cc">票据照片：</span>
+				<div class="imgbox">
+						@if(has(imgs)){
+						@for(img in imgs){
+					<div class="casherimg" style="text-align: center ">
+						<img width="800px" height="auto" src="/upload/${img!}"/>
+					</div>
+						@}}
+				</div>
+			</div>
+
+
+
+
+			<!--回复发起人-->
+			<div class="reviewdiv">
+				<textarea id="opinion" style="width: 100%; height: 100px" placeholder="填写审阅意见"></textarea>
+				<button class="btn btn-success" id="chooseuser">通过并加签</button>&nbsp;<button class="btn btn-danger" id="back">驳回</button>
+				<!--&nbsp;<button class="btn btn-warning" id="chooseuser">选择同事协同</button>-->
+			</div>
+			<!--审批记录图示-->
+			<div>
+
+			</div>
+
+			<div class="sptable">
+				<table class="table table-striped">
+					<thead>
+					<tr>
+						<th>
+							审批人
+						</th>
+						<th>
+							操作时间
+						</th>
+						<th>
+							审阅意见
+						</th>
+						<th>
+							状态
+						</th>
+					</tr>
+
+					</thead>
+					<tbody>
+					@if(size == 0){
+					<tr>
+						<td colspan="4" style="text-align: center"> 暂无人操作</td>
+					</tr>
+					@}
+					@for(sp in casherlog){
+					<tr>
+						<td>
+							<span style="color: #0000cc;">${sp.uname!}</span>
+						</td>
+						<td>
+							${sp.date!}
+						</td>
+						<td>
+							${sp.opinion!}
+						</td>
+						<td>
+							@if(sp.ispass == 2){
+							<a class="btn btn-danger">驳回</a>
+							@}else{
+							<a class="btn btn-success">通过</a>
+							@}
+						</td>
+					</tr>
+					@}
+
+
+					</tbody>
+				</table>
+			</div>
+
+
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+<script>
+	$(function(){
+		var userid = ""
+		var ajaxURL = "/user/getuser";
+		$.post(ajaxURL,null,function (res) {
+			userid = res.uid
+			$('#userid').val(userid)
+		});
+
+		$('#chooseuser').on("click",function () {
+//			var ajaxURL = "/casherlog/save";
+//			var ajaxData = {
+//				"nsl_casher_log.c_id":"${cid}",
+//				"nsl_casher_log.ispass":3,
+//				"nsl_casher_log.date":new Date().format("yyyy-MM-dd hh:mm:ss"),
+//				"nsl_casher_log.u_id":$('#userid').val(),
+//				"nsl_casher_log.opinion":$('#opinion').val()
+//			}
+//			$.post(ajaxURL,ajaxData,function (res) {
+//			});
+
+			var index = layer.open({
+				type: 2,
+				title:'查看详情',
+				area: ['90%', '70%'],
+				maxmin:true,
+				shadeClose: true, //点击遮罩关闭
+				content:  '/user/userchoose?who=casheradd&&cid=${cid}',
+				end:function () {
+					window.location.reload()
+				}
+			});
+
+			this.layerIndex = index;
+		})
+
+		$('#pass').on("click",function () {
+			var ajaxURL = "/casherlog/save";
+			var ajaxData = {
+				"nsl_casher_log.c_id":"${cid}",
+				"nsl_casher_log.ispass":3,
+				"nsl_casher_log.date":new Date().format("yyyy-MM-dd hh:mm:ss"),
+				"nsl_casher_log.u_id":$('#userid').val(),
+				"nsl_casher_log.opinion":$('#opinion').val()
+			}
+			console.log(ajaxData)
+			$.post(ajaxURL,ajaxData,function (res) {
+				window.location.reload()
+			});
+		})
+		$('#back').on("click",function () {
+			if($('#opinion').val()===""){
+				layer.msg("请填写审批意见")
+				return false;
+			}
+			var ajaxURL = "/casherlog/save";
+			var ajaxData = {
+				"mode":"back",
+				"nsl_casher_log.c_id":"${cid}",
+				"nsl_casher_log.ispass":2,
+				"nsl_casher_log.date":new Date().format("yyyy-MM-dd hh:mm:ss"),
+				"nsl_casher_log.u_id":$('#userid').val(),
+				"nsl_casher_log.opinion":$('#opinion').val()
+			}
+			console.log(ajaxData)
+			$.post(ajaxURL,ajaxData,function (res) {
+				window.location.reload()
+			});
+		})
+
+
+
+
+	});
+
+
+
+
+
+</script>
+@}	

@@ -1,0 +1,28 @@
+/* component/toast.wxss */
+.toast-out{
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  z-index: 888;
+}
+.t-content{
+  position: fixed;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  color: #fff;
+  padding: 8rpx 40rpx;
+  font-size: 32rpx;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: rgba(232, 60, 60, .5);
+  text-align: center;
+  border-radius: 10rpx;
+  overflow: hidden;
+}

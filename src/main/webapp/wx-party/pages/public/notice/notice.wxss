@@ -1,0 +1,23 @@
+.container .tab-nav-wrapper{
+  padding-top: 84rpx;
+  width: 100%;
+  z-index: 50!important;
+  white-space: nowrap;
+  height: 82rpx;
+  background: #fff;
+  border-bottom: 2rpx solid #DFDFDF;
+}
+.container .tab-nav-wrapper .nav-item{
+  display: inline-block;
+  width: 180rpx;
+  height: 80rpx;
+  color: #999;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  text-align: center;
+  border-bottom: 3rpx solid transparent; 
+}
+.container .tab-nav-wrapper .nav-item.on{
+  color: #6F9EED;
+  border-color: #6F9EED;
+}

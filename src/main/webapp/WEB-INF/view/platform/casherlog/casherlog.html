@@ -1,0 +1,81 @@
+@layout("/common/_curd/_container.html"){
+<style>
+	th{
+		text-align:center;
+	}
+	.ui-jqgrid tr.jqgrow td {
+		white-space: normal !important;
+		height:auto;
+		vertical-align:center;
+		padding-top:2px;
+	}
+</style>
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = ["",
+            			"报销单号",
+						"报销单", 
+						"审批人", 
+						"审批时间", 
+						"是否通过", 
+						"审批意见"
+		];
+		var _colmodel = [{name:"id", index:"id",hidden:true, width:100},
+            			{name:"c_id", index:"c_id", hidden:true,width:100},
+						{name:"cname", index:"cname", width:100},
+						{name:"uname", index:"uname", width:100},
+						{name:"date", index:"date", width:100},
+						{name:"pass", index:"pass", width:100},
+						{name:"opinion", index:"opinion", width:100}
+						];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id",
+				where:"{c_id:"+$('#cid').val()+"}",
+				order : "desc"}
+		});
+	}
+</script>
+<input type="hidden" value="${cid!}" id="cid">
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+			@		{name:"报销单", index:"cname", type:"text"},
+			@		{name:"审批人", index:"uname", type:"text"},
+			@		{name:"审批时间", index:"date", type:"text"},
+			@		{name:"是否通过", index:"pass", type:"text"},
+			@		{name:"审批意见", index:"opinion", type:"text"}
+			@];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

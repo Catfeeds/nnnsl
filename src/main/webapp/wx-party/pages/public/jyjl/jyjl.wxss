@@ -1,0 +1,13 @@
+.container .jy{
+  padding-top: 84rpx;
+}
+
+.container .clean-list .item-right .clean-title{
+  font-size: 32rpx;
+  color: #333;
+  display: block;
+  text-overflow: ellipsis;  
+  overflow: hidden;
+  white-space: nowrap;
+  height: 48rpx;
+}

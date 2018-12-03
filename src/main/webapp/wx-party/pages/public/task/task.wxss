@@ -1,0 +1,54 @@
+.container .task-list{
+  padding-top: 125rpx;
+}
+.statusgrey{
+  background: gray;
+}
+.container > .tab-nav-wrapper .tab-nav text:nth-child(2){
+  border-left: 2rpx solid #5AB0E3;
+  border-right: 2rpx solid #5AB0E3;
+}
+.container .task-list .task-list-item{
+  padding: 30rpx 35rpx;
+  background-color: #fff;
+  border-bottom: 2rpx solid #ddd;
+}
+.container .task-list .item-title{
+  vertical-align: middle;
+  color: #333;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  margin-bottom: 40rpx;
+  overflow : hidden;
+}
+.container .task-list .item-title > text{
+  float: left;
+  width: 100rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  color: #fff;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  margin-right: 20rpx;
+  background-color: #F5BE41;
+}
+.container .task-list .item-title > text.over{
+  background-color: #999;
+}
+.container .task-list .item-title > text.on{
+  background-color: #5BB85D;
+}
+.container .task-list .item-title > text.grey{
+  background-color: gray;
+}
+.container .task-list .item-info,
+.container .task-list .item-result{
+  font-size: 26rpx;
+  color: #999;
+}
+.container .task-list .item-info view.time{float: left;}
+.container .task-list .item-info text.num{
+  float: right;
+  text-align: right;
+}

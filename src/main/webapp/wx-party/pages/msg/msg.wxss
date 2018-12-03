@@ -1,0 +1,42 @@
+.container .msg-list{
+  padding-top: 125rpx;
+}
+.container .msg-list .msg-list-item{
+  padding: 15rpx 30rpx;
+  background-color: #fff;
+  border-bottom: 2rpx solid #ddd;
+}
+.container .msg-list .item-title{
+  vertical-align: middle;
+  color: #333;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  margin-bottom: 5rpx;
+  overflow : hidden;
+}
+.container > .tab-nav-wrapper .tab-nav text:nth-child(2){
+  border-left: 2rpx solid #5AB0E3;
+  border-right: 2rpx solid #5AB0E3;
+}
+.container .msg-list .item-title > text{
+  float: left;
+  position: relative;
+  top: 8rpx;
+  width: 100rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  color: #fff;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  margin-right: 20rpx;
+  background-color: #F5BE41;
+}
+.container .msg-list .item-title > text.over{background-color: #999;}
+.container .msg-list .item-title > text.on{background-color: #5BB85D;}
+.container .msg-list .time {
+  font-size: 26rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  color: #999;
+}

@@ -1,0 +1,222 @@
+@layout("/common/_curd/_container.html"){
+<style>
+	.choose{
+		border:1px solid blue;
+		height: 350px;
+	}
+</style>
+<script type="text/javascript">
+    var ctx="${basePath}";
+    var grid_selector = "#grid-table";
+    var pager_selector = "#grid-pager";
+    var export_source = "user.oraclelist";
+    if("${func.isMySql()}" == "true"){
+        export_source = "user.mysqllist";
+    }
+
+    $(function(){
+        initGrid();
+        initZtree();
+        initMenuBtn("btns","${code}");
+    });
+
+    function initGrid(){
+        var choose = [];
+        var temp = [];
+        var grid_url = ctx+"/${code}/list";//查询列表接口
+        var _colnames=[ "账户", "姓名"];
+        var _colmodel=[   {name:"ID",index:"ID", width:80,hidden:true},
+            {name:"NAME",index:"NAME", width:80}
+        ];
+
+        jQuery(grid_selector).jqGrid({
+            url:grid_url,
+            //caption: "用户管理",
+            shrinkToFit:true,//适用于较少字段,响应式
+            colNames:_colnames,
+            colModel:_colmodel,
+            jsonReader:{id:"ID"},
+            pager : pager_selector,
+            postData: { sort: "status asc, account", order: "asc"},
+            gridComplete:function(){
+                var arr = $('#selectid').val();
+				var arry = arr.split(",");
+				var i = 0;
+				for(i in arry){
+					$("#grid-table").jqGrid("setSelection",arry[i]);
+				}
+			},
+            onSelectRow:function(rowid, e){
+                // var row =  $("#grid-table").jqGrid("setSelection",rowid);
+                $("ol").empty();
+                choose.push(rowid);
+                for(var i=0; i<choose.length; i++){
+                    if(choose[i]==0){
+                        choose.splice(i,1)
+						i--
+					}
+                    for(var j=i+1; j<choose.length; j++){
+                        if(choose[i]==choose[j]){
+                            choose.splice(j,1);
+                            j--;
+                        }
+                    }
+                }
+                $('#selectid').val(choose.toString())
+                var allname = ""
+
+                var data = {
+                    ids:choose.toString()
+                }
+                $.post("/user/findname", data, function (res) {
+                   // var names = res
+                    // $("#selectname").val(names)
+                    $("ol").empty();
+                    $.each(res,function(index,name){
+                            $("ol").append("<li id='"+name.id+"'>"+name.name+"<i class='ace-icon fa fa-trash' onclick='dele("+name.id+")' style='color:red'></i></li>");
+                        });
+                });
+            }
+        });
+
+
+    }
+
+
+
+    function initZtree(){
+        var setting = {
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: zTreeBeforeClick
+            }
+        };
+        $.post("${basePath}/user/userTreeList", function(data){
+            if(data.code===0){
+                $.fn.zTree.init($("#zTree"), setting, data.data);
+            }
+            else{
+                layer_alert("数据加载失败", "error");
+            }
+        }, "json");
+    }
+
+    function zTreeBeforeClick(treeId, treeNode, clickFlag) {
+        var id=treeNode.id;
+        if(id==""){
+            exwhere="";
+            searchGrid();
+            return;
+        }
+        else{
+            exwhere="{\"pId_equal\":\""+id+"\",\"or_uid_equal\":\""+id+"\"}";
+            searchGrid();
+        }
+
+    };
+
+</script>
+
+
+<!-- 配置grid -->
+<input type="hidden" id="selectid" value="">
+<input type="hidden" id="selectname" value="">
+<div class="row">
+	<div style="display: none">
+		@ var _col=[
+		@		   ];
+		@ include("/common/_function/_search.html",{"col":_col}){}
+	</div>
+
+	<div class="col-sm-3">
+		<div class="widget-box widget-color-blue2">
+			<div class="widget-header">
+				<h4 class="widget-title lighter smaller">部门组织架构</h4>
+			</div>
+
+			<div class="widget-body">
+				<div class="widget-main padding-8">
+					<ul id="zTree" class="ztree"></ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-6 tb-grid">
+		<!-- grid -->
+
+		<table id="grid-table"></table>
+		<!-- 分页 -->
+		<div id="grid-pager"></div>
+	</div>
+	<div class="col-xs-3 choose">
+		<ol>
+			<li>List item 1</li>
+			<li>List item 2</li>
+			<li>List item 3</li>
+		</ol>
+
+	</div>
+	<a class="btn btn-success" onclick="userchoose()">确定</a>
+</div>
+
+<!-- 引入列表页所需js -->
+@include("/common/_listscript.html"){}
+<link rel="stylesheet" href="${basePath}/static/zTree/css/zTreeStyle/zTreeStyle.css" />
+<script src="${basePath}/static/zTree/js/jquery.ztree.core.js" type="text/javascript" ></script>
+<style type="text/css">
+	.ztree li span.button.iconPerson_ico_docu{margin-right:2px; background: url(${basePath}/static/zTree/img/person.png) no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle}
+</style>
+
+<script>
+
+	dele = function(id){
+	    var ids = $("#selectid").val()
+		ids = ids.replaceAll(id,"");
+	    ids.replaceAll(",,",",")
+        $("#selectid").val(ids)
+        var data = {
+            ids:ids
+        }
+        $.post("/user/findname", data, function (res) {
+            $("ol").empty();
+            $.each(res,function(index,name){
+                $("ol").append("<li id='"+name.id+"'>"+name.name+"<i class='ace-icon fa fa-trash' onclick='dele("+name.id+")' style='color:red'></i></li>");
+            });
+        });
+	}
+    userchoose = function () {
+        var who = '${who}'
+        var fid = '${fid}'
+
+        var ajaxURL = "/files/update",
+            ajaxData = {
+                "fid":fid,
+                "addids":$('#selectid').val(),
+                "addname":$('#selectname').val(),
+                "mode":"addman"
+            }
+        $.post(ajaxURL,ajaxData,function (res) {
+            if(res.success===true){
+                layer.msg("已加签！", {
+                    shift: -1, time: 1000, end: function () {
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                    }
+                });
+
+            }
+
+        });
+
+
+    }
+
+</script>
+
+
+
+@}	

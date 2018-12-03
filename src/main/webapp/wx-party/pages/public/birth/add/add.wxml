@@ -1,0 +1,14 @@
+<view class='container'>
+  <view class='model-title'>图片添加</view>
+  <view class='img-list'>
+    <block wx:for='{{imgList}}' wx:key='unique'>
+      <image mode='scaleToFill' src='{{item}}'></image>
+    </block>
+    <image mode='scaleToFill' bindtap='addImage' src='/images/uploads.png'></image>
+  </view>
+  <view class='inline model-title'>内容录入</view>
+   <view class="section">
+    <textarea placeholder="请输入内容" bindinput='textInp' name="textarea" class='content'/>
+    <button class='btn' bindtap='submitEvent'> 提交 </button>
+  </view>
+</view>

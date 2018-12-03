@@ -1,0 +1,6 @@
+.container > .detail-content .video-box{
+  width: 100%;
+  height: 460rpx;
+  overflow: hidden;
+}
+.container > .detail-content .video-box video{width: 100%;height: 100%;}

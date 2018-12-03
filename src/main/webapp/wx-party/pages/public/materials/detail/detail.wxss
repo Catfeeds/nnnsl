@@ -1,0 +1,8 @@
+/* pages/index/news/detail/detail.wxss */
+.downloadBtn{
+  color: #333;
+  font-size: 32rpx;
+  border-bottom: 2rpx solid #ddd;
+  padding: 10rpx 30rpx;
+  border-top: 2rpx solid #ddd;
+}

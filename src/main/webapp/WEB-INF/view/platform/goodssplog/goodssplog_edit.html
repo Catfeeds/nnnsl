@@ -1,0 +1,20 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/update" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="nsl_goods_splog";
+		@ var _key="id";
+		@ var _col=[
+@			  {name:"", index:"id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"申请号", index:"gl_id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"审批人", index:"sp_id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"审批意见", index:"sp_opinion", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"version", type:"text",newline:true,length:8,required:"required"}		
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+	</form>
+
+@}

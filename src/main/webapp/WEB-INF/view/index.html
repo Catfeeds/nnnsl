@@ -1,0 +1,456 @@
+﻿
+
+@layout("/common/_container.html"){
+<!-- include the calendar js and css files -->
+
+
+<style>
+	.content {
+		margin-left: 0px;
+		width: 98%;
+		/*background: url(../image/nsl.jpg);*/
+		/*background-position: bottom;*/
+		/*background-size: cover;*/
+	}
+	.s-body-content{
+		margin-left: 0px;
+		width: 98%;
+        padding-left:20px ;
+		/*background: url(../image/nsl.jpg);*/
+		/*background-position: bottom;*/
+		/*background-size: cover;*/
+	}
+	.spnum{
+		margin: 8px;
+		border-radius: 50%;
+		height: 20px;
+		width: 20px;
+		display: inline-block;
+		background: #dc3a1e;
+		vertical-align: top;
+	}
+    .s-list-center {
+        position: absolute;
+        top: 0;
+        right: 120px;
+    }
+    .choose{
+        margin: 0;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        background: #00a0e9;
+    }
+    .unforgot{
+        width: 97%;
+        height:287px;
+        border:1px solid grey;
+        border-radius: 5px;
+        padding: 20px;
+    }
+    .unforgot span{
+        font-size: 1.6rem;
+    }
+    .navs{
+        margin-top: 5rem;
+        background-color: #00b7ee;
+        height: 300px;
+        line-height: 300px;
+        text-align: center;
+    }
+    .navs2{
+        margin-top: 5rem;
+        background-color: #b80005;
+        height: 300px;
+        line-height: 300px;
+        text-align: center;
+    }
+    .navspan{
+        font-size: 6rem;
+        color:white;
+    }
+
+    .clo{
+        font-size:18px;
+        font-weight: bold;
+        /*color: #000000;*/
+        text-shadow: 0 1px 0 #ffffff;
+        opacity: 0.5;
+        background-color: white;
+        border: 0;
+    }
+    i{
+        margin-left: 10px;
+    }
+
+    .daiban{
+        margin-top: 10px;
+        background-color: white;
+    }
+    .mobilheader{
+        background-color: #59ff9c;
+        text-align: center;
+    }
+    .daiban .title{
+        font-size: 36px;
+    }
+    .mobilup{
+        display: none;
+    }
+    .udown{
+        height: 30px;
+    }
+    .uname{
+        float: left;
+        font-size: 18px;
+    }
+    .utime{
+        float: right;
+        font-size: 18px;
+    }
+    .utitle{
+        font-size: 36px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+    .udown{
+        margin-top: 50px;
+    }
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name=”viewport” content=”width=device-width, initial-scale=1″ />
+<title>南丝路集团OA管理系统</title>
+<meta charset="utf-8" />
+<link href="../../css/site.css" type="text/css" rel="stylesheet"/>
+<link href="../../css/menu.css" rel="stylesheet" />
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<!--<script src="js/list.js"></script>-->
+<body>
+
+
+<!--顶部标题-->
+<!--<div class="s-header">-->
+<!--<span>宜兴市政府信息化项目管理系统</span>-->
+<!--</div>-->
+<!--主体-->
+<div class="s-content">
+	<!--左侧菜单-->
+	<!--右侧内容-->
+	<div class="s-body">
+		<!--正文-->
+		<input type="hidden" value="${isfirst!}" id="isfirst"/>
+		<div class="s-body-content">
+
+            <div class="row">
+
+
+
+                    <a href="/cars/choose">
+                        <div class="col-xs-6 visible-xs-block visible-sm-block  navs" >
+                            <span class="navspan">派车管理</span>
+                        </div>
+                    </a>
+
+
+                <div class="col-xs-6 visible-xs-block visible-sm-block  navs2" >
+                    <span class="navspan">文件审批</span>
+                </div>
+
+
+                <!--手机版-->
+                <div class="col-xs-12 visible-xs-block visible-sm-block  daiban">
+                    <div class="mobilheader">
+                        <span class="title" style="color: blue;">待办事项</span><span class="title" style=" color: orangered;    height: 20px;    line-height: 20px;    text-align: center"> ${indexnum!}</span>
+
+                        <!--<a  class="s-card-more">-->
+						<!--<span class="spnum" >-->
+							  <!--<span style="display: block;    color: #FFFFFF;    height: 20px;    line-height: 20px;    text-align: center"> ${indexnum!}</span>-->
+						<!--</span>-->
+                        <!--</a>-->
+                    </div>
+                    <div class="s-card-body">
+                        <ul class="s-list">
+                            @for(notice in index){
+                            <li>
+                                <!--<em class="s-list-item-icon"></em>-->
+                                <div class="mobilup">
+                                    @if(notice.vers == "3"){
+                                    <a  class="btn btn-success btn-xs" data-icon="fa fa-cog" >报销</a>
+                                    @}else if(notice.vers == "1"){
+                                    <a  class="btn btn-danger btn-xs" data-icon="fa fa-cog" >文件</a>
+                                    @}else if(notice.vers == "2"){
+                                    <a  class="btn btn-warning btn-xs" data-icon="fa fa-cog" >回复</a>
+                                    @}
+                                </div>
+                                <div class="utitle">
+                                    <a  class="mtitle" href="${notice.type}${notice.id}"  data-title="待办事项"  >${notice.title!}</a>
+                                </div>
+                                <div class="udown">
+                                    <span class="uname">${notice.uname}</span>
+                                    @if(!isEmpty(notice.cd)){
+                                    <span class="utime">${notice.cd!"",dateFormat='yyyy-MM-dd'}</span>
+                                    @}else{
+                                    <span class="utime">${notice.cd!""}</span>
+                                    @}
+                                </div>
+                            </li>
+                            @}
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                <!--pc版-->
+                <div class="col-md-8 col-md-offset-1  visible-md-block visible-lg-block  s-card">
+                    <div class="s-card-header">
+                        待办事项
+                        <a  class="s-card-more">
+						<span class="spnum" >
+							  <span style="display: block;    color: #FFFFFF;    height: 20px;    line-height: 20px;    text-align: center"> ${indexnum!}</span>
+						</span>
+                        </a>
+                    </div>
+                    <div class="s-card-body">
+                        <ul class="s-list">
+                            @for(notice in index){
+                            <li>
+                                <!--<em class="s-list-item-icon"></em>-->
+                                <div>
+                                    @if(notice.vers == "3"){
+                                    <a  class="btn btn-success btn-xs" data-icon="fa fa-cog" >报销</a>
+                                    @}else if(notice.vers == "1"){
+                                    <a  class="btn btn-danger btn-xs" data-icon="fa fa-cog" >文件</a>
+                                    @}else if(notice.vers == "2"){
+                                    <a  class="btn btn-warning btn-xs" data-icon="fa fa-cog" >回复</a>
+                                    @}
+                                    <a  class="s-list-item-text" data-url="${notice.type}${notice.id}" data-addtabs="view" data-title="待办事项" data-icon="fa fa-cog" class=" tmsp-pointer">${notice.title!}</a>
+
+                                    <span class="s-list-center">${notice.uname}</span>
+                                    @if(!isEmpty(notice.cd)){
+                                    <span class="s-list-item-time">${notice.cd!"",dateFormat='yyyy-MM-dd'}</span>
+                                    @}else{
+                                    <span class="s-list-item-time">${notice.cd!""}</span>
+                                    @}
+
+                                </div>
+
+
+                            </li>
+                            @}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-3  visible-md-block visible-lg-block  s-card">
+                    <div class="s-card-header">
+                        公司公告
+                        <a   data-url="/notice/" data-addtabs="view" data-title="公司公告" data-icon="fa fa-cog" class="s-card-more">
+                            <!--<span class="spnum" >-->
+                            <!--<span style="display: block;    color: #FFFFFF;    height: 20px;    line-height: 20px;    text-align: center"> 更多》</span>-->
+                            <!--</span>-->
+                            更多>
+                        </a>
+                    </div>
+                    <div class="s-card-body">
+                        <ul class="s-list">
+                            @for(notice in allnotice){
+                            <li>
+                                <em class="s-list-item-icon"></em>
+                                <div>
+                                    <a  class="s-list-item-text" data-url="/notice/view/${notice.f_it_xl!}" data-addtabs="view" data-title="公司公告" data-icon="fa fa-cog" class=" tmsp-pointer">${notice.f_vc_bt!}</a>
+                                    <!--<span class="s-list-center">${notice.f_vc_bt}</span>-->
+                                </div>
+                            </li>
+                            @}
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-11 col-md-11 visible-lg-block  visible-md-block  s-card" >
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="s-card-header">
+                                备忘录
+                                <a   data-url="" data-addtabs="view" data-title="备忘录" data-icon="fa fa-cog" class="s-card-more">
+                                </a>
+                            </div>
+                            <div class="s-card-body">
+                                <div id="my-calendar"></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div  style="height: 28px">
+
+                                <a  href="#" id="more" onclick="adds()" class="btn btn-white btn-xs">
+                                    <i class="ace-icon fa fa-plus green"></i>添加备忘录 </a>
+                            </div>
+                            <div class="unforgot" id="unforgot">
+                                <!--<p>abcde</p>-->
+                                <!--<p>dbdedf</p>-->
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+<script>
+    $(function () {
+        var h = $(document).height();
+        $('.s-menu').css('height', (h - 50) + 'px');
+        $('.s-body-content').css('height', (h - 90) + 'px');
+        window.onresize = function () {
+            var h = $(document).height();
+            $('.s-menu').css('height', (h - 50) + 'px');
+            $('.s-body-content').css('height', (h - 90) + 'px');
+        }
+    });
+    $(".list_dt").on("click", function () {
+        $('.list_dd').stop();
+        $(this).siblings("dt").removeAttr("id");
+        if ($(this).attr("id") == "open") {
+            $(this).removeAttr("id").siblings("dd").slideUp();
+        } else {
+            $(this).attr("id", "open").next().slideDown().siblings("dd").slideUp();
+        }
+    });
+</script>
+<script>
+
+    function adds() {
+        var index = layer.open({
+            type: 2,
+            title: '添加备忘录',
+            area: ['70%', '70%'],
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭
+            content: '/unforgot/add',
+            end:function () {
+                window.location.reload()
+            }
+        });
+    }
+    function editunf(id) {
+        var index = layer.open({
+            type: 2,
+            title: '添加备忘录',
+            area: ['70%', '70%'],
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭
+            content: '/unforgot/edit/'+id,
+            end:function () {
+                window.location.reload()
+            }
+        });
+    }
+
+    opens = function (href) {
+        window.location.href= href;
+    };
+    delunf = function (id) {
+        var ajaxURL = "/unforgot/remove";
+        var ajaxData = {
+            ids:id
+        }
+        $.post(ajaxURL,ajaxData,function (res) {
+            layer.msg(res.message)
+            window.location.reload()
+        });
+    }
+
+    function edit(pid) {
+        var index = layer.open({
+            type: 2,
+            title: '查看详情',
+            area: ['90%', '70%'],
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭
+            content: '/user/editMySelf'
+        });
+    }
+
+
+</script>
+
+
+
+
+
+
+
+
+<!-- initialize the calendar on ready -->
+<script type="application/javascript">
+    var date = ${datelist!}
+    $(document).ready(function () {
+        $("#my-calendar").zabuto_calendar({
+            data: date,
+            cell_border: true,
+            today: true,
+            show_days: true,
+            weekstartson: 0,
+            nav_icon: {
+                prev: '<i class="fa fa-chevron-circle-left"></i>',
+                next: '<i class="fa fa-chevron-circle-right"></i>'
+            },
+            action: function () {
+                return myDateFunction(this.id, false);
+            }
+
+        });
+        $("#unforgot").empty();//备忘录初始化
+            var ajaxURL = "/unforgot/list";
+            var ajaxData = {
+                u_id:"${uid!}",
+                dateformat:"${today}"
+            }
+            $.post(ajaxURL,ajaxData,function (res) {
+                for(var i = 0;i<res.length;i++){
+                    var j = i+1
+                    var ids = res[i].id;
+                    $("#unforgot").append("<span>"+j+"-"+res[i].content+"</span><button type='button' class='clo' data-dismiss='alert'><i class='ace-icon fa fa-edit green' onclick='editunf("+ids+")' ></i><i class='ace-icon fa fa-trash' onclick='delunf("+ids+")' style='color:red'></i></button><br/>")//添加子元素
+            }
+        });
+    });
+
+    function myDateFunction(id, fromModal) {
+        console.log("click me and id="+id + " and fromModal = " + fromModal)
+        var date = $("#" + id).data("date")
+        $('.choose').attr("class","day")
+        $('#' + id +"_day").attr("class","choose")
+        $("#unforgot").empty();//备忘录初始化
+
+        var ajaxURL = "/unforgot/list";
+        var ajaxData = {
+            u_id:"${uid!}",
+            dateformat:date
+        }
+        $.post(ajaxURL,ajaxData,function (res) {
+            for(var i = 0;i<res.length;i++){
+                var j = i+1;
+                var ids = res[i].id;
+                $("#unforgot").append("<span>"+j+"-"+res[i].content+"</span><button type='button' class='clo' data-dismiss='alert'><i class='ace-icon fa fa-edit green' onclick='editunf("+ids+")' ></i><i class='ace-icon fa fa-trash' onclick='delunf("+ids+")' style='color:red'></i></button><br/>")//添加子元素
+            }
+        });
+
+    }
+
+
+</script>
+
+
+
+
+<script src="/static/calendar/zabuto_calendar.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/calendar/zabuto_calendar.min.css">
+
+
+
+
+
+</body>
+@}

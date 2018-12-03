@@ -1,0 +1,70 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = ["", 
+						"车牌号", 
+						"驾驶员", 
+						"照片", 
+						"备注",
+						"状态"];
+		var _colmodel = [{name:"id", index:"id", hidden:true,width:100},
+						{name:"num", index:"num", width:100},
+						{name:"name", index:"name", width:100},
+						{name:"img", index:"img", width:100,formatter:function (value, rows, index) {
+								return "<img src='"+value+"' height=100px width=100px/>";
+                            }},
+						{name:"remarks", index:"remarks", width:100},
+						{name:"ss", index:"ss", width:100}
+						];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id", order : "desc"}
+		});
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+@		{name:"", index:"id", type:"text"},
+			@		{name:"车牌号", index:"num", type:"text"},
+			@		{name:"驾驶员", index:"name", type:"text"},
+			@		{name:"照片", index:"pic", type:"text"},
+			@		{name:"", index:"version", type:"text"},
+			@		{name:"备注", index:"remarks", type:"text"},
+			@		{name:"状态", index:"status", type:"text"}							
+			@];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

@@ -1,0 +1,21 @@
+<view class='container'>
+    <!-- 标题 -->
+    <view class='title'>
+      <view class='on title-item'>待我缴费</view>
+      <view class='title-item'>我已缴费</view>
+    </view>
+    <view class='pay-list'>
+    <block wx:for='{{actData}}' wx:key='unique'>
+      <view class='pay-list-item'>
+        <view class='item-title'>
+          微加智慧党建发起为老党员拍最美照片活动
+        </view>
+        <view class='clearfix item-tip'>
+          <text class='num'>{{item.num}}人已缴费</text>
+          <text class='pay-btn'>缴费</text>
+        </view>
+      </view>
+    </block>
+     <view class='none'>没有更多的内容了...</view>
+  </view>
+</view>

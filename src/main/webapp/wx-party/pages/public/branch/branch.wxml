@@ -1,0 +1,34 @@
+<view class='page-warpper'>
+  <image src='../../../images/branchBg.png'></image>
+   <view class='container'>
+    <view wx:if='{{branchInfo.zbjs!==""}}' class='member-title'>
+      <view class='title' data-page='news'>支部简介</view>
+      <view class='content-box'>{{branchInfo.zbjs}}</view>
+    </view>
+    <view class='inline member-leader'>
+      <view class='title' data-page='news'>支部书记</view>
+      <view class='leader-box'>
+        <view class='member-img'><image mode='scaleToFill' src='{{branchInfo.sjurl?branchInfo.sjurl:defaultImg}}' binderror="avatarError"></image></view>
+        <view class='member-info'>
+          <view class='info-item'><text class='iconfont icon-name'>姓名：</text>{{branchInfo.sjname}}</view>
+          <view class='content-box'>{{branchInfo.sjjs}}</view>
+        </view>
+      </view>
+    </view>
+    <!-- 基本信息 -->
+    <view class='inline title' data-page='news'>支部成员</view>
+    <view class='member-list'>
+      <block wx:for='{{branchData}}' wx:key='unique'>
+        <view class='member-item'>
+          <view class='member-img'><image mode='scaleToFill' src='{{item.avatar?item.avatar:defaultImg}}' binderror="imgError" data-errorimg="{{index}}"></image></view>
+          <view class='member-info'>
+            <view class='info-item'><text class='iconfont icon-name'>姓名：</text>{{item.NAME?item.NAME:"暂无"}}</view>
+            <view class='info-item'><text class='iconfont icon-pay'>积分：</text>{{item.points?item.points+"分":"暂无"}}</view>
+            <view class='info-item'><text class='iconfont icon-activity'>活动：</text>{{item.countevent?item.countevent+"次":"暂无"}}</view>
+            <view class='info-item'><text class='iconfont icon-attend'>课时：</text>{{item.points?item.points+"分钟":"暂无"}}</view>
+          </view>
+        </view>
+      </block>  
+    </view>
+  </view>  
+</view>

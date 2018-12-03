@@ -1,0 +1,23 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/update" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="nsl_cars_gas";
+		@ var _key="id";
+		@ var _col=[
+@			  {name:"", index:"id", type:"hidden",newline:true,length:8,required:"required"},
+		@			  {name:"车辆", index:"cnum", type:"text",newline:true,length:8,required:"required",disabled:"disabled"},
+		@			  {name:"经办人", index:"cname", type:"text",newline:true,length:8,required:"required",disabled:"disabled"},
+		@			  {name:"当前里程数", index:"mileage", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"加油量", index:"gas", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"金额", index:"money", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"日期", index:"date", type:"text",newline:true,length:8,required:"required"}
+
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+	</form>
+
+@}

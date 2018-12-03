@@ -1,0 +1,12 @@
+<view class="section">
+  <textarea placeholder="请输入您的提议内容" bindinput='adviceInp' name="textarea" class='class-textarea'/>
+  <view class='class-radio-view'>
+    <view class='class-view'>匿名：</view>
+    <radio-group class="radio-group" bindchange="radioChange">
+      <label class="radio" wx:for="{{items}}" wx:key='unique'>
+        <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+      </label>
+    </radio-group>
+  </view>    
+  <button class='btn' bindtap='submitEvent'> 提交 </button>
+</view>

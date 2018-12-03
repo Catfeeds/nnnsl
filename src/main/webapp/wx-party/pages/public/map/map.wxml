@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<!-- <view class='container'>
+<image mode='scaleToFill' src='/images/top.png'></image>
+<map id="map" longitude="119.873579" latitude="31.33062" scale="12" controls="7" markers="{{markers}}"  show-location>
+</map>
+</view> -->
+<view>
+  <web-view src="https://www.yxzhdj.com/blog"></web-view>
+</view>
+

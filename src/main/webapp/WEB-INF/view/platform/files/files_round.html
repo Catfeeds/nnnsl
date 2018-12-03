@@ -1,0 +1,170 @@
+@layout("/common/_curd/_container.html"){
+<style>
+	th{
+		text-align:center;
+	}
+	.ui-jqgrid tr.jqgrow td {
+		white-space: normal !important;
+		height:auto;
+		vertical-align:center;
+		padding-top:2px;
+	}
+</style>
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+        var userid = ""
+        var ajaxURL = "/user/getuser";
+        $.post(ajaxURL,null,function (res) {
+            userid = res.uid
+            $('#userid').val(userid)
+            initGrid();
+        });
+
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = ["", 
+						"公文类型", 
+						"公文文号", 
+						"起草部门", 
+						"经办人", 
+						"文件名", 
+						"主送",
+						"抄送", 
+						"公文描述", 
+						"部门领导批示", 
+						"领导班子批示", 
+						"总经理批示", 
+						"起草日期",
+						"传阅进度",
+						"是否提交"];
+		var _colmodel = [{name:"id", hidden:true,index:"id", width:100},
+						{name:"typename", index:"typename", width:50},
+						{name:"num", index:"num", width:80},
+						{name:"fullname", index:"fullname", width:80},
+						{name:"uname", index:"uname", width:60},
+						{name:"title_o", index:"title_o", width:200,align:"left",formatter:function (value, rows, index) {
+                                return '<a href="#"  onclick="downs('+"'"+value+"'"+')">'+value+'</a>';
+                            }},
+						{name:"selectname", index:"selectname", width:60},
+						{name:"copyman", index:"copyman", width:60},
+						{name:"discript", index:"discript", width:140},
+						{name:"d_opinion", index:"d_opinion", hidden:true, width:100},
+						{name:"l_opinion", index:"l_opinion",  hidden:true,width:100},
+						{name:"h_opinion", index:"h_opinion", hidden:true, width:100},
+						{name:"date", index:"date", width:100},
+						{name:"staname", index:"staname", width:100,formatter:function (value, rows, index) {
+                                return '<a href="#" class="btn btn-btn btn-success btn-xs" onclick="sta('+"'"+index.id+"'"+')">'+"传阅进度"+'</a>';
+                            }},
+						{name:"issubmit", index:"issubmit", width:60,formatter:function (value, rows, index) {
+                                    return '<a href="#" class="btn btn-btn btn-success btn-xs" onclick="opinion('+"'"+index.id+"'"+')">'+"填写意见"+'</a>';
+                            }}];
+
+
+
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id",
+                where:"{vv:"+$('#userid').val()+",round:1}",
+				order : "desc"}
+		});
+
+		add = function(){
+            var index = layer.open({
+                type: 2,
+                title:'查看详情',
+                area: ['100%', '100%'],
+                maxmin:true,
+                shadeClose: true, //点击遮罩关闭
+                content:  '/files/add?round=1'
+            });
+
+            this.layerIndex = index;
+		}
+
+        opinion = function (entId) {
+            var index = layer.open({
+                type: 2,
+                title:'查看详情',
+                area: ['100%', '100%'],
+                maxmin:true,
+                shadeClose: true, //点击遮罩关闭
+                content:  "/files/roundopinion?id="+ entId
+            });
+
+            this.layerIndex = index;
+        };
+
+        sta = function (entId) {
+            var index = layer.open({
+                type: 2,
+                title:'查看详情',
+                area: ['100%', '100%'],
+                maxmin:true,
+                shadeClose: true, //点击遮罩关闭
+                content:  '/files/roundlog/'+entId
+            });
+
+            this.layerIndex = index;
+        };
+        view = function (entId) {
+            var index = layer.open({
+                type: 2,
+                title:'查看详情',
+                area: ['90%', '70%'],
+                maxmin:true,
+                shadeClose: true, //点击遮罩关闭
+
+                content:  '/files/view/'+entId
+            });
+
+            this.layerIndex = index;
+        };
+        downs = function (entId) {
+            window.location.href = "/files/downs?file="+entId;
+        };
+	}
+</script>
+
+	<input type="hidden" id="userid" value="" >
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+			@		{name:"公文文号", index:"num", type:"text"},
+			@		{name:"起草部门", index:"fullname", type:"text"},
+			@		{name:"经办人", index:"uname", type:"text"},
+			@		{name:"文件名", index:"title_o", type:"text"},
+			@		{name:"公文描述", index:"discript", type:"text"},
+			@		{name:"进度", index:"status", type:"text"}
+			@];
+			@ include("/common/_function/_search_round.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<!--<div class="welljq well-sm" id="btns"></div>-->
+			<!-- grid -->
+			<div style="margin: 0 0 5px 5px">
+				<input type="button" class="btn btn-white"  onclick="add()" value="发起文件传阅">
+			</div>
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

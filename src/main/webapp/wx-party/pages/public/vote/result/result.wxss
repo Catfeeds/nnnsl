@@ -1,0 +1,88 @@
+.container .title-wrapper{border-bottom: 2rpx solid #ddd;}
+.container .title{
+  color: #333;
+  font-size: 38rpx;
+  font-weight: bold;
+  line-height: 60rpx;
+}
+.container > .title-wrapper .title-tip{
+  display: block;
+  width: 100%;
+  color: #999;
+  font-size: 28rpx;
+}
+.container > .title-wrapper .title-tip .time{float: left;}
+.container > .title-wrapper .title-tip .num{float: right;}
+.container .propose{
+  color: #999;
+  font-size: 30rpx;
+  padding: 20rpx 0 10rpx;
+}
+.container .question-list{
+  padding: 0 30rpx;
+  border-bottom: 2rpx solid #ccc;
+  margin-bottom: 230rpx;
+}
+.container .question-list .list-title{
+  color: #333;
+  font-size: 30rpx;
+  padding: 20rpx 0;
+  border-bottom: 2rpx dashed #ddd;
+}
+.container .question-list .list-title text{
+  font-size: 24rpx;
+  color: #999;
+}
+.container .question-list .list-option{
+  display: block;
+  padding: 15rpx 10rpx;
+  font-size: 26rpx;
+  color: #333;
+} 
+.container .question-list .list-item .list-option:not(:last-child){border-bottom: 2rpx dashed #ddd;}
+.container checkbox .wx-checkbox-input{
+   width: 30rpx;
+   height: 30rpx;
+   line-height: 30rpx;
+   margin-right: 15rpx;
+   border: 2rpx solid #ccc;
+}
+.container checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+   background-color: #E83C3C;
+   border: 2rpx solid #E83C3C;
+}
+.container checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+   width: 30rpx;
+   height: 30rpx;
+   line-height: 30rpx;
+   text-align: center;
+   font-size: 26rpx;
+   color:#fff;
+   background: transparent;
+   transform:translate(-50%, -50%) scale(1);
+   -webkit-transform:translate(-50%, -50%) scale(1);
+}
+.container .bottom-wrapper{
+  position: fixed;
+  bottom: 0;
+  top: auto;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: #fff;
+  padding: 20rpx 20rpx 30rpx;
+  border-top: 2rpx solid #ccc;
+}
+.container .bottom-wrapper label{
+  color: #999;
+  width: 100%;
+  font-size: 28rpx;
+}
+.container .bottom-wrapper button{
+  background-color: #E83C3C;
+  color: #fff;
+  margin-top: 20rpx;
+}
+.container .bottom-wrapper button.over{
+  background-color: #999;
+}

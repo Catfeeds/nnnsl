@@ -1,0 +1,42 @@
+.container > .detail-content .statement{
+  font-size: 26rpx;
+  color: #666;
+}
+.container > .detail-content .act-info{
+  line-height: 60rpx;
+  font-size: 24rpx;
+  color: #333;
+  padding: 15rpx 0 20rpx;
+  border-top: 1rpx solid #ddd;
+  margin-top: 20rpx;
+}
+.container > .detail-content .act-info text{
+  color: #040404;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.container > .detail-content button{
+  background-color: #E83C3C;
+  color: #fff;
+}
+.container > .detail-content button.over{
+  background-color: #999;
+}
+.container > .detail-content button.on{
+  background-color: #5BB85D;
+}
+.container > .detail-content .people .people-tit{
+  display: flex;
+  color: #666;
+  font-size: 30rpx;
+  padding: 10rpx 0;
+  border-bottom: 2rpx solid #ddd;
+}
+.container > .detail-content .people .people-tit view{flex: 1;}
+.container > .detail-content .people .people-tit view.open{text-align: right;}
+.container > .detail-content .people .people-tit .iconfont{font-size: 24rpx;}
+.container > .detail-content .people .people-con{
+  padding: 25rpx 0 0;
+  font-size: 28rpx;
+  color: #A4A4A4;
+}

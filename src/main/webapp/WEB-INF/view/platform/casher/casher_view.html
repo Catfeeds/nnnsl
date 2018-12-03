@@ -1,0 +1,27 @@
+@layout("/common/_curd/_container.html"){
+<style>
+	img{
+		width: 98%;
+		margin: 20px 0 0 0 ;
+		border:3px solid grey;
+		}
+</style>
+		<!-- 表单 -->
+
+		<div class="outer">
+			<div class="img">
+				@if(has(imgs)){
+					@for(img in imgs){
+						<img src="/upload/${img}">
+					@}
+				@}else{
+					<h1>未上传任何票据</h1>
+				@}
+
+			</div>
+		</div>
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+
+@}

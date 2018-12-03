@@ -1,0 +1,20 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+		@			  {name:"起草部门", index:"fullname", type:"text",newline:true,length:8},
+		@			  {name:"经办人", index:"uname", type:"text",newline:true,length:8},
+		@			  {name:"文件名", index:"title_o", type:"text",newline:true,length:8},
+		@			  {name:"可见人", index:"selectname", type:"text",newline:true,length:8},
+		@			  {name:"公文描述", index:"discript", type:"text",newline:true,length:8},
+		@			  {name:"录入时间", index:"date", type:"text",newline:true,length:8}
+		@		   ];
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

@@ -1,0 +1,112 @@
+page{
+  width: 100%;
+  height: 100%;
+}
+.page-warpper{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.page-warpper > image{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+.container .title{
+  position: relative;
+  font-size: 30rpx;
+  color: #333;
+  padding: 15rpx 0 15rpx 50rpx;
+  border-bottom: 1rpx solid #eee;
+  border-top: 1rpx solid #eee;
+  background-color: rgba(255, 255, 255, .7);
+}
+.container .title::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 30rpx;
+  width: 6rpx;
+  height: 40rpx;
+  background-color: #E83C3C;
+}
+.container .content-box,
+.container .leader-box{
+  display: block;
+  color: #333;
+  text-indent: 2em;
+  font-size: 32rpx;
+  line-height: 40rpx;
+  padding: 15rpx 25rpx 20rpx;
+  border-bottom: 2rpx solid #eee;
+  background-color: rgba(255, 255, 255, .6);
+}
+.container .leader-box{text-indent: 0;}
+.container .leader-box .content-box{
+  padding: 20rpx 0;
+  font-size: 30rpx;
+  line-height: 40rpx;
+  height: 170rpx;
+  background-color: transparent;
+}
+.container .member-list{
+  display: flex;
+  background-color: rgba(255, 255, 255, .6);
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.container .member-item{
+  width: 50%;
+  box-sizing: border-box;
+  padding: 10rpx;
+  border-bottom: 2rpx dashed #eee;
+}
+.container .member-item:nth-of-type(2n-1){border-right: 2rpx dashed #eee;}
+.container .member-img{
+  float: left;
+  width: 120rpx;
+  height: 150rpx;
+  overflow: hidden;
+  border-radius: 10rpx;
+  border: 2rpx solid #E83C3C;
+}
+.container .leader-box .member-img{
+  width: 180rpx;
+  height: 240rpx;
+}
+.container .member-img image{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.container .member-info{
+  overflow: hidden;
+  padding-left: 15rpx;
+}
+.container .leader-box .member-info{padding-left: 30rpx;}
+.container .member-info .info-item{
+  line-height: 36rpx;
+  font-size: 26rpx;
+  color: #E83C3C;
+}
+.container .member-info .info-item text{
+  color: #333;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+.container .leader-box .info-item,
+.container .leader-box .info-item text,
+.container .leader-box .info-item text::before{font-size: 34rpx;}
+.container .info-item text::before{
+  color: #E83C3C;
+  font-size: 30rpx;
+  font-weight: normal;
+  margin-right: 5rpx;
+}

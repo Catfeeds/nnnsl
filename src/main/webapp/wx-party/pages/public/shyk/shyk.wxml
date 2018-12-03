@@ -1,0 +1,22 @@
+<view class='container'>
+  <image mode='scaleToFill' src='/images/top.png'></image>
+  <view class='model-title'>三会一课
+    <view wx:if='isAdmin' class='add'>
+      <image bindtap='add'  style="width: 100%; height: 100%; " mode="aspectFit" src="/images/add.png"></image>
+    </view>
+  </view>
+  <view class='news-list'>
+    <block wx:for='{{newsData}}' wx:key='unique'>
+      <view bindtap='seeDatil' data-id='{{item.id}}' class='news-list-item'>
+        <view class='news-img'>
+          <image mode='scaleToFill' src='{{item.imgs?BathUrl+item.imgs:defaultImg}}' binderror="imgError" data-errorimg="{{index}}"></image>
+        </view>
+        <view class='news-content'>
+          <view>{{item.content}}</view>
+          <text>{{item.time}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class='none'>没有更多记录了...</view>
+</view>

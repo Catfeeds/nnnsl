@@ -1,0 +1,19 @@
+<view class='container'>
+  <image mode='scaleToFill' src='/images/top.png'></image>
+  <view class='model-title'>党建资料</view>
+  <!-- 图文列表 -->
+  <view class='news-list'>
+    <block wx:for='{{newsData}}' wx:key='unique'>
+      <view bindtap='seeDatil' data-id='{{item.id}}' class='news-list-item'>
+        <view class='news-img'>
+          <image mode='scaleToFill' src='{{item.url?item.url:defaultImg}}' binderror="imgError" data-errorimg="{{index}}"></image>
+        </view>
+        <view class='news-content'>
+          <view>{{item.title}}</view>
+          <text>{{item.creat_time}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view wx:if='{{isAll}}' class='none'>没有更多的资料了...</view>
+</view>

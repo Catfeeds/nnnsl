@@ -1,0 +1,49 @@
+
+@layout("/common/_curd/_container.html"){
+
+
+	<form data-url="${basePath}/${code}/save" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="nsl_carslog";
+		@ var _col=[
+		@			  {name:"选择车辆", index:"cname", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"选择车辆", index:"c_id", type:"hidden",newline:true,length:8,required:"required"},
+		@			  {name:"起始时间", index:"start", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"乘客名字", index:"uname", type:"text",newline:true,length:8},
+		@			  {name:"派车原因", index:"cause", type:"text",newline:true,length:8}
+		@		   ];
+		@ include("/common/_curd/_add.html", {"col":_col, "table":_table}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"新增", btn_close:"关闭"}) {}
+	</form>
+@}
+
+<script>
+    $("#_cname").on("click",function () {
+        var index = layer.open({
+            type: 2,
+            title:'选择车辆',
+            area: ['90%', '70%'],
+            maxmin:true,
+            shadeClose: true, //点击遮罩关闭
+            content:  '/cars/allcar',
+        });
+
+        this.layerIndex = index;
+    });
+
+</script>
+
+<script src='${basePath}/static/laydate/new/laydate/laydate.js'></script>
+<script>
+    laydate.render({
+        elem: '#_start'
+        ,type: 'datetime'
+    });
+
+    laydate.render({
+        elem: '#_over'
+        ,type: 'datetime'
+    });
+</script>

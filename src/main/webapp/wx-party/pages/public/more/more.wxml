@@ -1,0 +1,49 @@
+<view class='container'>
+  <image mode='scaleToFill' src='/images/top.png'></image>
+  <view class='more-model'>
+      <view class='title'>新闻</view>
+      <view class='list'>
+        <view bindtap='toModel' data-page='news'>
+          <text class='iconfont icon-news' style='background-color:#B1224D;'></text>党建要闻
+        </view>
+        <view bindtap='toModel' data-page='notice'>
+          <text class='iconfont icon-notice' style='background-color:#67B36B;'></text>通知公告
+        </view>
+        <view bindtap='toModel' data-page='clean'>
+          <text class='iconfont icon-clean' style='background-color:#78B22A;'></text>反腐倡廉
+        </view>
+        <view bindtap='toModel' data-page='file'>
+          <text class='iconfont icon-archive' style='background-color:#C50206;'></text>党建资料
+        </view>
+    </view>
+  </view>
+  <view class='inline more-model'>
+      <view class='title'>活动</view>
+      <view class='list'>
+        <view bindtap='toModel' data-page='vote'>
+          <text class='iconfont icon-vote' style='background-color:#ED8A09;'></text>投票管理
+        </view>
+        <view bindtap='toModel' data-page='activity'>
+          <text class='iconfont icon-activity' style='background-color:#3FB779;'></text>活动管理
+        </view>
+        <view bindtap='toModel' data-page='class'>
+          <text class='iconfont icon-class' style='background-color:#9D5CAE;'></text>课程管理
+        </view>
+        <view bindtap='toModel' data-page='meet'>
+          <text class='iconfont icon-meet' style='background-color:#439AA1;'></text>会议管理
+        </view>
+        <view bindtap='toModel' data-page='shyk'>
+          <text class='iconfont icon-note' style='background-color:#9D5CAE;'></text>三会一课
+        </view>
+        <view bindtap='toModel' data-page='birth'>
+          <text class='iconfont icon-logo' style='background-color:#C50206;'></text>主题党日
+        </view>
+        <view bindtap='toModel' data-page='map'>
+          <text class='iconfont icon-position' style='background-color:#67B36B;'></text>党建地图
+        </view>
+        <view bindtap='toModel' data-page='list'>
+          <text class='iconfont icon-rank' style='background-color:#67B36B;'></text>党建擂台
+        </view>
+    </view>
+  </view>
+</view>

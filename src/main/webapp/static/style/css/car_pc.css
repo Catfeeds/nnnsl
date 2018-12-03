@@ -1,0 +1,79 @@
+.outer{
+	/*height: 100%;*/
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+.inner{
+	margin: 20px 10px 40px 10px;
+	height: 120px;
+	width:200px;
+	border:1px solid greenyellow;
+	border-radius: 5px;
+}
+.up{
+	height: 80px;
+	width: 100%;
+	line-height: 80px;
+}
+.up span{
+	font-size: 30px;
+	text-align: center;
+}
+.down{
+	height: 20px;
+	width: 100%;
+	line-height: 20px;
+	text-align: right;
+}
+.down span{
+	width: 60px;
+	display: block;
+	float: right;
+	text-align: center;
+	background-color: #00a0e9;
+}
+.statu1{
+	width: 60px;
+	height: 20px;
+	background-color: #00B83F;
+	text-align: center;
+}
+.statu2,.statu3,.statu4{
+	width: 60px;
+	height: 20px;
+	background-color: #b80023;
+	text-align: center;
+}
+.stspan{
+	text-align: center;
+	color: white;
+}
+.hid{
+	display: none;
+	height: 100px;
+	width: 100%;
+
+}
+.show{
+	height: 100px;
+	width: 100%;
+}
+.inp{
+	margin: 20px 0 20px 0;
+	height: 30px;
+	line-height: 30px;
+	font-size: 28px;
+}
+#num{
+	font-size: 21px;
+}
+#setstatus{
+	position: fixed;
+	width: 300px;
+	height: 200px;
+}
+.showinput{
+	width:200px;
+	height: 20px;
+}

@@ -1,0 +1,43 @@
+<view class='container'>
+  <view class='title-wrapper'>
+    <view class='title'>{{detail.Course.title}}</view>
+    <!-- 时间+作者+阅读数 -->
+    <view class='title-tip'>
+      <view class='title-tip-left'>
+        <text class='time'>{{detail.Course.create_time}}</text>
+      </view>
+      <view class='title-tip-right'>
+        <text class='iconfont icon-eye'></text>{{detail.Course.version}}
+      </view>
+    </view>
+  </view>
+  <view class='detail-content'>
+     <view class='video-box'>
+      <video src="{{detail.Course.vedio}}"></video>
+    </view> 
+    <view class='tool-btn'>
+      <text bindtap='tickle' class='good-btn iconfont icon-good {{isTickle===1?"on":""}}'></text>
+      <text bindtap='collect' class='collect-btn iconfont icon-collect {{isCollect===1?"on":""}}'></text>
+    </view>
+    <view class='mark-num'>共{{detail.marks}}个人觉得很赞！</view>
+    <view wx:if='{{isComment}}' class='comment'>
+      <view class='comment-tit'>
+        <view>共{{detail.countcomm}}条评论</view>
+        <view wx:if='{{detail.countcomm!==0}}' bindtap='isShow' class='open'>展开 <text class='iconfont {{showComment?"icon-retract":"icon-open"}}'></text></view>
+      </view>
+      <view wx:if='{{showComment}}' class='comment-con'>
+        <block wx:for='{{detail.select}}' wx:key='unique'>
+          <view class='comment-item'><text>{{item.info_id}}：</text>{{item.comm}}</view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <toast id='toast'>{{content}}</toast>
+  <!-- 底部输入框 -->
+  <view wx:if='{{isComment}}' class='bottom-wrapper'>
+    <input type='text' bindinput='commentInp' cursor-spacing='8' value='{{commentText}}' placeholder='说点什么吧'><text class='iconfont icon-edit'></text></input>
+    <view class='btn-box'>
+      <text class='send-btn' bindtap='commentEvent'>发送</text>
+    </view>
+  </view>
+</view>

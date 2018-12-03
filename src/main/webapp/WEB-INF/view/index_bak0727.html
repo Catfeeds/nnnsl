@@ -1,0 +1,322 @@
+﻿
+
+@layout("/common/_container.html"){
+
+<style>
+	.content {
+		margin-left: 0px;
+		width: 98%;
+		background: url(../image/nsl.jpg);
+		background-position: bottom;
+		background-size: cover;
+	}
+	.s-body-content{
+		margin-left: 0px;
+		width: 98%;
+		background: url(../image/nsl.jpg);
+		background-position: bottom;
+		background-size: cover;
+	}
+	.spnum{
+		margin: 8px;
+		border-radius: 50%;
+		height: 20px;
+		width: 20px;
+		display: inline-block;
+		background: #dc3a1e;
+		vertical-align: top;
+	}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name=”viewport” content=”width=device-width, initial-scale=1″ />
+<title>宜兴市政府信息化项目管理系统</title>
+<meta charset="utf-8" />
+<link href="../../css/site.css" type="text/css" rel="stylesheet"/>
+<link href="../../css/menu.css" rel="stylesheet" />
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<!--<script src="js/list.js"></script>-->
+<body>
+
+
+<!--顶部标题-->
+<!--<div class="s-header">-->
+<!--<span>宜兴市政府信息化项目管理系统</span>-->
+<!--</div>-->
+<!--主体-->
+<div class="s-content">
+	<!--左侧菜单-->
+	<!--右侧内容-->
+	<div class="s-body">
+		<!--正文-->
+		<input type="hidden" value="${isfirst!}" id="isfirst"/>
+		<div class="s-body-content">
+
+
+            <!--<div class="s-card" style="width:32%;">-->
+                <!--<div class="s-card-header">-->
+					<!--通知公告-->
+					<!--<a   data-url="/notice/" data-addtabs="view" data-title="通知公告" data-icon="fa fa-cog" class="s-card-more">更多<i></i></a>-->
+				<!--</div>-->
+				<!--<div class="s-card-body">-->
+					<!--<ul class="s-list">-->
+						<!--@for(notice in all){-->
+						<!--<li>-->
+							<!--<em class="s-list-item-icon"></em>-->
+							<!--<a  class="s-list-item-text" data-url="/notice/" data-addtabs="view" data-title="通知公告" data-icon="fa fa-cog" class=" tmsp-pointer">${notice.f_vc_bt!}</a>-->
+							<!--&lt;!&ndash;<span class="s-list-item-time">2018-10-3</span>&ndash;&gt;-->
+						<!--</li>-->
+						<!--@}-->
+					<!--</ul>-->
+				<!--</div>-->
+			<!--</div>-->
+
+            @if(ynleader==true){
+                <div class="s-card" style="width:32%;">
+                    <div class="s-card-header">
+                        待审阅文件
+                        <a   data-url="/files/sp" data-addtabs="view" data-title="待审阅文件" data-icon="fa fa-cog" class="s-card-more">
+                            <span class="spnum">
+                                  <span style="display: block;    color: #FFFFFF;    height: 20px;    line-height: 20px;    text-align: center"> ${spfilenum}</span>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="s-card-body">
+                        <ul class="s-list">
+                            @for(notice in spfile){
+                            <li>
+                                <em class="s-list-item-icon"></em>
+                                <a  class="s-list-item-text" data-url="/files/sp" data-addtabs="view" data-title="待审阅文件" data-icon="fa fa-cog" class=" tmsp-pointer">${notice.title_o!}</a>
+                                <!--<span class="s-list-item-time">2018-10-3</span>-->
+                            </li>
+                            @}
+                        </ul>
+                    </div>
+                </div>
+            @}
+
+
+
+
+			<div class="s-card" style="width:32%;">
+				<div class="s-card-header">
+					待传阅文件
+					<a   data-url="/files/round" data-addtabs="view" data-title="文件传阅" data-icon="fa fa-cog" class="s-card-more">
+						<span class="spnum" >
+							  <span style="display: block;    color: #FFFFFF;    height: 20px;    line-height: 20px;    text-align: center"> ${roundsize!}</span>
+						</span>
+					</a>
+				</div>
+				<div class="s-card-body">
+					<ul class="s-list">
+						@for(notice in round){
+						<li>
+							<em class="s-list-item-icon"></em>
+							<a  class="s-list-item-text" data-url="/files/round" data-addtabs="view" data-title="文件传阅" data-icon="fa fa-cog" class=" tmsp-pointer">${notice.title_o!}</a>
+							<!--<span class="s-list-item-time">2018-10-3</span>-->
+						</li>
+						@}
+					</ul>
+				</div>
+			</div>
+
+
+            <div class="s-card" style="width:32%;">
+                <div class="s-card-header">
+                    待执行文件
+                    <a   data-url="/files/zhixing" data-addtabs="view" data-title="待执行文件" data-icon="fa fa-cog" class="s-card-more">
+						<span class="spnum" >
+							  <span style="display: block;    color: #FFFFFF;    height: 20px;    line-height: 20px;    text-align: center"> ${dofilessize!}</span>
+						</span>
+                    </a>
+                </div>
+                <div class="s-card-body">
+                    <ul class="s-list">
+                        @for(notice in dofiles){
+                        <li>
+                            <em class="s-list-item-icon"></em>
+                            <a  class="s-list-item-text" data-url="/files/zhixing" data-addtabs="view" data-title="待执行文件" data-icon="fa fa-cog" class=" tmsp-pointer">${notice.title_o!}</a>
+                            <!--<span class="s-list-item-time">2018-10-3</span>-->
+                        </li>
+                        @}
+                    </ul>
+                </div>
+            </div>
+
+            @if(yncaiwu==true){
+                <div class="s-card" style="width:32%;">
+                    <div class="s-card-header">
+                        报销审批
+                        <a   data-url="/casher/sp" data-addtabs="view" data-title="报销审批" data-icon="fa fa-cog" class="s-card-more">
+                            <span class="spnum" >
+                                  <span style="display: block;    color: #FFFFFF;    height: 20px;    line-height: 20px;    text-align: center"> ${cashersize!}</span>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="s-card-body">
+                        <ul class="s-list">
+                            @for(notice in casher){
+                            <li>
+                                <em class="s-list-item-icon"></em>
+                                <a  class="s-list-item-text" data-url="/casher/sp" data-addtabs="view" data-title="报销审批" data-icon="fa fa-cog" class=" tmsp-pointer">${notice.title!}</a>
+                                <!--<span class="s-list-item-time">2018-10-3</span>-->
+                            </li>
+                            @}
+                        </ul>
+                    </div>
+                </div>
+            @}
+
+
+
+
+
+			<div class="s-card" style="width:32%;">
+				<div class="s-card-header">
+					用章申请(待开发)
+					<a   data-url="/notice/" data-addtabs="view" data-title="用章申请" data-icon="fa fa-cog" class="s-card-more">更多<i>&raquo;</i></a>
+				</div>
+				<div class="s-card-body">
+					<ul class="s-list">
+						@for(notice in all){
+						<li>
+							<em class="s-list-item-icon"></em>
+							<a  class="s-list-item-text" data-url="/notice/" data-addtabs="view" data-title="用章申请" data-icon="fa fa-cog" class=" tmsp-pointer">${notice.f_vc_bt!}</a>
+							<!--<span class="s-list-item-time">2018-10-3</span>-->
+						</li>
+						@}
+					</ul>
+				</div>
+			</div>
+
+            <div class="s-card" style="width:32%;">
+                <div class="s-card-header">
+                    物品借还(待开发)
+                    <a   data-url="/notice/" data-addtabs="view" data-title="物品借还" data-icon="fa fa-cog" class="s-card-more">更多<i>&raquo;</i></a>
+                </div>
+                <div class="s-card-body">
+                    <ul class="s-list">
+                        @for(notice in all){
+                        <li>
+                            <em class="s-list-item-icon"></em>
+                            <a  class="s-list-item-text" data-url="/notice/" data-addtabs="view" data-title="物品借还" data-icon="fa fa-cog" class=" tmsp-pointer">${notice.f_vc_bt!}</a>
+                            <!--<span class="s-list-item-time">2018-10-3</span>-->
+                        </li>
+                        @}
+                    </ul>
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
+<script>
+    $(function () {
+        var h = $(document).height();
+        $('.s-menu').css('height', (h - 50) + 'px');
+        $('.s-body-content').css('height', (h - 90) + 'px');
+        window.onresize = function () {
+            var h = $(document).height();
+            $('.s-menu').css('height', (h - 50) + 'px');
+            $('.s-body-content').css('height', (h - 90) + 'px');
+        }
+    });
+    $(".list_dt").on("click", function () {
+        $('.list_dd').stop();
+        $(this).siblings("dt").removeAttr("id");
+        if ($(this).attr("id") == "open") {
+            $(this).removeAttr("id").siblings("dd").slideUp();
+        } else {
+            $(this).attr("id", "open").next().slideDown().siblings("dd").slideUp();
+        }
+    });
+</script>
+<script>
+    opens = function (href) {
+        window.location.href= href;
+    };
+    function edit(pid) {
+        var index = layer.open({
+            type: 2,
+            title: '查看详情',
+            area: ['90%', '70%'],
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭
+            content: '/user/editMySelf'
+        });
+    }
+
+
+    edit = function (entId) {
+        var index = layer.open({
+            type: 2,
+            title:'查看详情',
+            area: ['90%', '70%'],
+            maxmin:true,
+            shadeClose: true, //点击遮罩关闭
+
+            content:  "/myproject/edit/"+ entId,
+            end:function () {
+                window.location.reload();
+            }
+        });
+
+        this.layerIndex = index;
+    };
+    scheme = function (entId) {
+        var index = layer.open({
+            type: 2,
+            title: '查看详情',
+            area: ['90%', '70%'],
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭
+
+            content: "/projects/scheme?zz=no&&id=" + entId,
+            end: function () {
+                window.location.reload();
+            }
+        });
+    };
+    schemezz = function (entId) {
+        var index = layer.open({
+            type: 2,
+            title: '查看详情',
+            area: ['90%', '70%'],
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭
+
+            content: "/projects/scheme?zz=yes&&id="+ entId,
+            end: function () {
+                window.location.reload();
+            }
+        });
+    };
+    tohandle = function (entId) {
+        var index = layer.open({
+            type: 2,
+            title: '查看详情',
+            area: ['90%', '70%'],
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭
+
+            content: "/listcom/tenderto?id="+ entId,
+            end: function () {
+                window.location.reload();
+            }
+        });
+    };
+    handle1 = function (entId) {
+        var index = layer.open({
+            type: 2,
+            title: '上传招标文件',
+            area: ['90%', '70%'],
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭
+
+            content: "/listcom/handle?id="+ entId,
+            end: function () {
+                window.location.reload();
+            }
+        });
+    };
+</script>
+</body>
+@}

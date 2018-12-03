@@ -1,0 +1,154 @@
+@layout("/common/_curd/_container.html"){
+<style>
+    label{
+        text-align: right;
+    }
+</style>
+<script src = '${basePath}/static/blade/js/xdate.js'></script>
+<script type="text/javascript">
+    var ctx = "${basePath}";
+    var grid_selector = "#grid-table";
+    var pager_selector = "#grid-pager";
+
+
+    $(document).ready(function () {
+        $('#times').hide()
+        $('#excel').click(function () {
+            // console.log("aaaaa")
+            // window.location.href = "/blog/carout"
+            $('#times').show()
+        });
+        $('#subm').click(function () {
+            $('#times').hide()
+            window.location.href = "/blog/carout?start="+$('#start').val()+"&&over="+$('#over').val()
+        });
+        $('#thismonth').click(function () {
+            var firstDate = new Date();
+            firstDate.setDate(1); //第一天
+            var endDate = new Date(firstDate);
+            endDate.setMonth(firstDate.getMonth()+1);
+            endDate.setDate(0);
+            var mstart = new XDate(firstDate).toString('yyyy-MM-dd') + " 00:00:00",
+                mover = new XDate(endDate).toString('yyyy-MM-dd') + " 23:59:59"
+
+
+
+            $('#times').hide()
+            window.location.href = "/blog/carout?start="+mstart+"&&over="+mover
+        });
+
+    })
+    $(function () {
+        initGrid();
+        initMenuBtn("btns", "${code}");
+    });
+
+    function initGrid() {
+        var grid_url = ctx + "/${code}/list";
+        var _colnames = ["",
+            "车牌号",
+            "驾驶员",
+            "派车时间",
+            "结束时间",
+            "派车人",
+            "乘客名字",
+            "派车原因"];
+        var _colmodel = [{name: "id", index: "id", hidden: true, width: 100},
+            {name: "cnum", index: "cnum", width: 100},
+            {name: "cname", index: "cname", width: 100},
+            {name: "start", index: "start", width: 100},
+            {name: "over", index: "over", hidden: true, width: 100},
+            {name: "dname", index: "dname", width: 100},
+            {name: "uname", index: "uname", width: 100},
+            {name: "cause", index: "cause", width: 100}
+        ];
+
+        jQuery(grid_selector).jqGrid({
+            url: grid_url,
+            shrinkToFit: true,
+            colNames: _colnames,
+            colModel: _colmodel,
+            jsonReader: {id: "id"},
+            pager: pager_selector,
+            postData: {sort: "id", order: "desc"}
+        });
+    }
+</script>
+
+
+<!-- 配置 grid -->
+<div class="row">
+    <div class="col-xs-12 tb-grid">
+        <!-- 配置 查询 -->
+        @ var _col=[
+        @ {name:"车牌号", index:"cnum", type:"text"},
+        @ {name:"驾驶员", index:"cname", type:"text"},
+        @ {name:"派车原因", index:"cause", type:"text"}
+        @];
+        @ include("/common/_function/_search.html",{"col":_col}){}
+        <!-- 按钮 -->
+
+        <div class="welljq well-sm" >
+            <button class="btn btn-xs btn-white " id="carslog_add">&nbsp;
+                <li class=" fa fa-floppy-o bigger-120"></li>&nbsp;新增&nbsp;
+            </button>&nbsp;
+            <button class="btn btn-xs btn-white " id="carslog_edit">&nbsp;<li class=" fa fa-pencil  bigger-120"></li>&nbsp;修改&nbsp;
+            </button>&nbsp;<button class="btn btn-xs btn-white " id="carslog_remove">&nbsp;<li
+                class=" fa fa-times  bigger-120"></li>&nbsp;删除&nbsp;
+            </button>&nbsp;<button class="btn btn-xs btn-white " id="excel">&nbsp;<li
+                    class=" fa fa-floppy-o bigger-120"></li>&nbsp;导出&nbsp;
+            </button>&nbsp;
+            <div id="times" >
+                <div class="row">
+                    <label class="col-lg-1 control-label no-padding-right"> 起始时间 </label>
+                    <div class="col-lg-4">
+                        <input type="text" id="start" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-lg-1 control-label no-padding-right"> 截止时间 </label>
+                    <div class="col-lg-4">
+                        <input type="text" id="over" class="form-control">
+                    </div>
+                </div>
+                <div class="row" style="margin: 10px 0 0 0px">
+                    <label class="col-lg-1 control-label no-padding-right">   </label>
+                    &nbsp;
+                    <button class="btn btn-primary" id="subm">确定导出</button>
+                    &nbsp;
+                    <button class="btn btn-warning" id="thismonth">导出本月</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+        <!--<div class="welljq well-sm" id="btns"></div>-->
+        <!-- grid -->
+        <table id="grid-table"></table>
+        <!-- 分页-->
+        <div id="grid-pager"></div>
+    </div>
+</div>
+
+<!-- 引入所需的js -->
+@include("/common/_listscript.html"){}
+<script src='${basePath}/static/laydate/new/laydate/laydate.js'></script>
+<script>
+    laydate.render({
+        elem: '#start'
+        ,type: 'datetime'
+    });
+
+    laydate.render({
+        elem: '#over'
+        ,type: 'datetime'
+    });
+</script>
+
+@}

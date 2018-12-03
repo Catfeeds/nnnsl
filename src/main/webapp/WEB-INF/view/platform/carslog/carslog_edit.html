@@ -1,0 +1,21 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/update" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="nsl_carslog";
+		@ var _key="id";
+		@ var _col=[
+		@			  {name:"车牌号", index:"cnum", type:"text",newline:true,length:8,required:"required",disabled:"disabled"},
+		@			  {name:"起始时间", index:"start", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"结束时间", index:"over", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"派车人", index:"dname", type:"text",newline:true,length:8,required:"required",disabled:"disabled"},
+		@			  {name:"乘客名字", index:"uname", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"派车原因", index:"cause", type:"text",newline:true,length:8,required:"required"},
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+	</form>
+
+@}

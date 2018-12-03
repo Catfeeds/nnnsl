@@ -1,0 +1,144 @@
+@layout("/common/_curd/_container.html"){
+<style>
+	.inner{
+		display: flex;
+		width:100%;
+		height: 200px;
+		/*border:1px solid red;*/
+		justify-content: center;
+	}
+	.item{
+		width:auto;
+		height: 200px;
+
+		border:1px solid blue;
+		text-align: center;
+		line-height: 200px;
+	}
+	.item span{
+		font-size: 25px;
+	}
+	.img{
+		width: 100px;
+		height: 200px;
+		line-height: 200px;
+		text-align: center;
+
+	}
+	.img img{
+		width: 1000px;
+		height: 200px;
+	}
+	.lct{
+		width:100%;
+		height: 100%;
+		text-align: center;
+	}
+
+</style>
+<!--<script type="text/javascript">-->
+	<!--var ctx = "${basePath}";-->
+	<!--var grid_selector = "#grid-table";-->
+	<!--var pager_selector = "#grid-pager";-->
+	<!---->
+	<!--$(function(){-->
+		<!--initGrid();-->
+		<!--initMenuBtn("btns", "${code}");-->
+	<!--});-->
+	<!---->
+	<!--function initGrid(){-->
+		<!--var grid_url = ctx + "/casherlog/list";-->
+		<!--var _colnames = ["",-->
+            			<!--"报销单号",-->
+						<!--"报销单", -->
+						<!--"审批人", -->
+						<!--"审批时间", -->
+						<!--"是否通过", -->
+						<!--"审批意见"-->
+		<!--];-->
+		<!--var _colmodel = [{name:"id", index:"id",hidden:true, width:100},-->
+            			<!--{name:"c_id", index:"c_id", hidden:true,width:100},-->
+						<!--{name:"cname", index:"cname", width:100},-->
+						<!--{name:"uname", index:"uname", width:100},-->
+						<!--{name:"date", index:"date", width:100},-->
+						<!--{name:"ispass", index:"ispass", width:100,formatter:function (value, row, index) {-->
+								<!--if(value===1){-->
+								    <!--return "待审核";-->
+								<!--}else if(value===2){-->
+                                    <!--return "驳回";-->
+                                <!--}else if(value===3){-->
+                                    <!--return "审核通过";-->
+                                <!--}else {-->
+								    <!--return "待审核";-->
+								<!--}-->
+                            <!--}},-->
+						<!--{name:"opinion", index:"opinion", width:100}-->
+						<!--];-->
+		<!---->
+		<!--jQuery(grid_selector).jqGrid({-->
+			<!--url : grid_url,-->
+		    <!--shrinkToFit : true,-->
+			<!--colNames : _colnames,-->
+			<!--colModel : _colmodel, -->
+			<!--jsonReader : {id :"id"},-->
+			<!--pager : pager_selector,-->
+			<!--postData : {sort : "id",-->
+				<!--where:"{c_id:"+$('#cid').val()+"}",-->
+				<!--order : "desc"}-->
+		<!--});-->
+	<!--}-->
+<!--</script>-->
+<input type="hidden" value="${cid!}" id="cid">
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			<!-- 按钮 -->
+
+			<div class="lct">
+				<div class="lct">
+					@if(status == 1){
+					<img src="/static/blade/img/p1.png">
+					@}else if(status == 2){
+					<img src="/static/blade/img/p2.png">
+					@}else if(status == 3){
+					<img src="/static/blade/img/p3.png">
+					@}else if(status == 4){
+					<img src="/static/blade/img/p4.png">
+					@}else if(status == 5){
+					<img src="/static/blade/img/p5.png">
+					@}else if(status == 6){
+					<img src="/static/blade/img/p6.png">
+					@}else if(status == 7){
+					<img src="/static/blade/img/p7.png">
+					@}else if(status == 8){
+					<img src="/static/blade/img/b6.png">
+					@}else if(status == 9){
+					<img src="/static/blade/img/b5.png">
+					@}else if(status == 10){
+					<img src="/static/blade/img/b4.png">
+					@}else if(status == 11){
+					<img src="/static/blade/img/b3.png">
+					@}else if(status == 12){
+					<img src="/static/blade/img/b2.png">
+					@}else if(status == 13){
+					<img src="/static/blade/img/b1.png">
+					@}else {
+					<img src="/static/blade/img/lct.png">
+					@}
+
+				</div>
+			</div>
+			<!--<div class="welljq well-sm" id="btns"></div>-->
+			<!-- grid -->
+			<!--<table id="grid-table"></table>-->
+			<!-- 分页-->
+			<!--<div id="grid-pager"></div>-->
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

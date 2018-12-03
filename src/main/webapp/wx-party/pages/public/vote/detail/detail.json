@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "参与投票",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "toast": "/component/toast/toast"
+  }
+}

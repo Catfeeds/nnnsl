@@ -1,0 +1,19 @@
+<import src="../../../../lib/wxParse/wxParse.wxml"/>
+<view class='container'>
+  <view class='title-wrapper'>
+    <view class='title'>{{detail.News.title}}</view>
+    <!-- 时间+作者+阅读数 -->
+    <view class='title-tip'>
+      <view class='title-tip-left'>
+        <text class='time'>{{detail.News.creat_time}} {{detail.News.author?detail.News.author:""}}</text>
+      </view>
+    </view>
+  </view>
+  <view class='detail-content'>
+    <view class='content-box'><template is="wxParse" data="{{wxParseData:content.nodes}}"/></view>
+  </view>
+  <block wx:for='{{annexs}}' wx:key='unique'>
+          <view class='downloadBtn' data-name='{{item}}' bindtap='downloadEvent'>附件：{{item}}</view>
+  </block>
+  <toast id='toast'>{{content}}</toast>
+</view>

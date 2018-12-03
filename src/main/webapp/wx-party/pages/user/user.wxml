@@ -1,0 +1,51 @@
+<view class='container'>
+  <view class='user-wrapper'>
+    <!-- 用户信息 -->
+    <view class='title'>
+      <view class='img-box'>
+         <image mode='scaleToFill' src='{{userImg==""?defaultImg:userImg}}' binderror='imgError'></image>
+      </view>
+      <view class='title-content'>
+        <view>{{userInfo.NAME}}</view>
+        <text>账号:{{userInfo.ACCOUNT}}</text>
+        <text bindtap='changeImage'  class='modify-head iconfont icon-modify'>修改头像</text>
+        <text bindtap='loginOut'  class='login-out iconfont icon-out'>退出登录</text>
+      </view>
+    </view>
+    <view class='inline user-tool'>
+      <view bindtap='toPage' data-page='mine' class='tool-item'>
+        <text class='iconfont icon-archive'></text>我的档案<text class='iconfont icon-more'></text>
+      </view>
+      <view bindtap='toPage' data-page='notice' class='tool-item'>
+        <text class='iconfont icon-notice'></text>通知公告<text class='iconfont icon-more'></text>
+      </view>
+      <view bindtap='toPage' data-page='collect' class='tool-item'>
+        <text class='iconfont icon-collect'></text>我的收藏<text class='iconfont icon-more'></text>
+      </view>
+      <view bindtap='toPage' data-page='meet' class='tool-item'>
+        <text class='iconfont icon-meet'></text>会议助手<text class='iconfont icon-more'></text>
+      </view>
+      <view bindtap='toPage' data-page='activity' class='tool-item'>
+        <text class='iconfont icon-activity'></text>党内活动<text class='iconfont icon-more'></text>
+      </view>
+      <view bindtap='toPage' data-page='vote' class='tool-item'>
+        <text class='iconfont icon-vote'></text>投票调研<text class='iconfont icon-more'></text>
+      </view>
+    </view>
+    <view class='inline user-tool'>
+      <view wx:if='{{isPoint}}' bindtap='toPage' data-page='point' class='tool-item'>
+        <text class='iconfont icon-mail'></text>支部打分<text class='iconfont icon-more'></text>
+      </view> 
+      <view bindtap='toPage' data-page='class' class='tool-item'>
+        <text class='iconfont icon-class'></text>在线课程<text class='iconfont icon-more'></text>
+      </view>
+      <view bindtap='toPage' data-page='task' class='tool-item'>
+        <text class='iconfont icon-task'></text>任务管理<text class='iconfont icon-more'></text>
+      </view>
+    </view>
+  </view>
+  <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetbindchange">    
+      <action-sheet-item bindtap="changeImg">修改头像</action-sheet-item>  
+      <action-sheet-cancel class="cancel">取消</action-sheet-cancel>  
+  </action-sheet>  
+</view>

@@ -1,0 +1,25 @@
+<view class='container'>
+  <!-- 基本信息 -->
+  <view class='mine-title'>
+    <view class='mine-img'><image mode='widthFix' src='{{imgURL==""?defaultImg:imgURL}}' binderror='imgError'></image></view>
+    <view class='mine-info'>
+      <view class='info-item'><text class='iconfont icon-name'>姓名：</text>{{userInfo.NAME?userInfo.NAME:"暂无"}}</view>
+      <view class='info-item'><text class='iconfont icon-sex'>性别：</text>{{userInfo.SEXNAME?userInfo.SEXNAME:"暂无"}}</view>
+      <view class='info-item'><text class='iconfont icon-nation'>民族：</text>{{userInfo.nat?userInfo.nat:"暂无"}}</view>
+      <view class='info-item'><text class='iconfont icon-edu'>学历：</text>{{userInfo.edu?userInfo.edu:"暂无"}}</view>
+    </view>
+  </view>
+  <!-- 详细信息 -->
+  <view class='inline other-info'>
+    <view class='info-item'><text class='iconfont icon-point'>当前积分：</text>{{userInfo.points?userInfo.points:"暂无数据"}}</view>
+    <view class='info-item'><text class='iconfont icon-rank'>积分排名：</text>{{userInfo.ID?userInfo.ID:"暂无数据"}}</view>
+  </view>
+  <!-- 详细信息 -->
+  <view class='inline detail-info'>
+    <view class='info-item'><text class='iconfont icon-birth'>出生日期：</text>{{birthTime?birthTime:"暂无数据"}}</view>
+    <view class='info-item'><text class='iconfont icon-date'>入党日期：</text>{{inTime?inTime:"暂无数据"}}</view>
+    <view class='info-item'><text class='iconfont icon-branch'>所属党支部：</text>{{userInfo.DEPTNAME?userInfo.DEPTNAME:"暂无数据"}}</view>
+    <view class='info-item'><text class='iconfont icon-tel'>联系电话：</text>{{userInfo.PHONE?userInfo.PHONE:"暂无数据"}}</view>
+    <view class='info-item'><text class='iconfont icon-ID'>身份证号：</text>{{userInfo.id_card?userInfo.id_card:"暂无数据"}}</view>
+  </view>
+</view>

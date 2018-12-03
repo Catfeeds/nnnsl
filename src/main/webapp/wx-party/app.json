@@ -1,0 +1,95 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/public/task/task",
+    "pages/public/meet/meet",
+    "pages/public/activity/activity",
+    "pages/public/clean/clean",
+    "pages/public/materials/materials",
+    "pages/index/index",
+    "pages/public/jyjl/jyjl",
+    "pages/public/ztlt/ztlt",
+    "pages/public/notice/notice",
+    "pages/public/news/news",
+    "pages/public/birth/birth",
+    "pages/public/shyk/shyk",
+    "pages/public/shyk/add/add",
+    "pages/user/user",
+    "pages/public/list/list",
+    "pages/public/more/more",
+    "pages/public/map/map",
+    "pages/msg/msg",
+    "pages/branch/branch",
+    "pages/public/branch/branch",
+    "pages/public/class/class",
+    "pages/public/birth/detail/detail",
+    "pages/public/jyjl/detail/detail",
+    "pages/public/ztlt/detail/detail",
+    "pages/public/shyk/detail/detail",
+    "pages/public/birth/add/add",
+    "pages/public/vote/vote",
+    "pages/public/vote/result/result",
+    "pages/mail/mail",
+    "pages/user/collect/collect",
+    "pages/regist/regist",
+    "pages/public/advice/advice",
+    "pages/user/pay/pay",
+    "pages/user/mine/mine",
+    "pages/public/meet/leave/leave",
+    "pages/public/news/detail/detail",
+    "pages/public/materials/detail/detail",
+    "pages/public/clean/detail/detail",
+    "pages/public/class/detail/detail",
+    "pages/public/notice/detail/detail",
+    "pages/public/vote/detail/detail",
+    "pages/public/task/detail/detail",
+    "pages/public/meet/detail/detail",
+    "pages/public/activity/detail/detail",
+    "pages/user/point/point"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#E83C3C",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "#fff",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#FFF",
+    "selectedColor": "#FFFF00",
+    "borderStyle": "black",
+    "backgroundColor": "#E83C3C",
+    "list": [
+      {
+        "iconPath": "images/111.png",
+        "selectedIconPath": "images/11.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "images/222.png",
+        "selectedIconPath": "images/22.png",
+        "pagePath": "pages/branch/branch",
+        "text": "我的支部"
+      },
+      {
+        "iconPath": "images/333.png",
+        "selectedIconPath": "images/33.png",
+        "pagePath": "pages/mail/mail",
+        "text": "党员通讯录"
+      },
+      {
+        "iconPath": "images/444.png",
+        "selectedIconPath": "images/44.png",
+        "pagePath": "pages/msg/msg",
+        "text": "我的消息"
+      },
+      {
+        "iconPath": "images/555.png",
+        "selectedIconPath": "images/55.png",
+        "pagePath": "pages/user/user",
+        "text": "我的党建"
+      }
+    ]
+  }
+}

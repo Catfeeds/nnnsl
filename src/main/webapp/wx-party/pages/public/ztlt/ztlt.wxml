@@ -1,0 +1,38 @@
+<!-- 内容容器 -->
+<view class='container'>
+  <!-- 搜索框 -->
+  <view class='search'>
+    <!-- 搜索输入框 -->
+    <view class='input-wrapper'>
+      <input class='search-input' bindinput='searchInp' type='text' value='{{searchText}}' placeholder='输入标题搜索'>
+        <icon bindtap='searchEvent' class='search-icon' type='search' size='16'></icon>
+      </input>
+    </view>
+  </view>
+  <view class='clean-wrapper zt'>
+    <!-- 选项卡-导航 -->
+    <!-- <scroll-view class='tab-nav-wrapper' scroll-x='true'>
+      <text bindtap='tabSwitch' data-index='all' class='nav-item {{tabNav=="all"?"on":""}}'>全部</text>
+      <block wx:for='{{navData}}' wx:key='unique'>
+        <text bindtap='tabSwitch' data-index='{{item.id}}' class='nav-item {{tabNav==item.id?"on":""}}'>{{item.cart}}</text>
+      </block>
+    </scroll-view> -->
+    <!-- 反腐倡廉列表 -->
+    <view class='clean-list'>
+      <block wx:for='{{cleanData}}' wx:key='unique'>
+        <view bindtap='seeDetail' data-id='{{item.id}}' class='clean-list-item'>
+          <view class='item-left'>
+            <text class='month'>{{item.month}}</text>
+            <view class='day'>{{item.day}}</view>
+          </view>
+          <view class='item-right'>
+            <view class='clean-title'>{{item.title}}</view>
+            <!-- <text class='clean-tip'>{{item.tip}}</text> -->
+            <text class='clean-tip type'>主题论坛</text>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view wx:if='{{isAll}}' class='none'>没有更多的内容了...</view>
+  </view>
+</view>

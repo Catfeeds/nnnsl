@@ -1,0 +1,63 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/files/subopinion" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@if(has(mode)){
+		<input type="hidden" value="${mode!}" name="nsl_files_log.version">
+		@}
+		<input type="hidden" value="${fid}" name="nsl_files_log.f_id">
+		@ var _table="nsl_files_log";
+		@ var _key="id";
+		@ var _col=[
+		@			  {name:"是否通过", index:"ispass", value:"0" ,type:"select_903",newline:true,length:8,required:"required"},
+		@			  {name:"选择上级可见", index:"next", type:"text",newline:true,length:8},
+		@			  {name:"选择上级可见", index:"nextid", type:"hidden",newline:true,length:8},
+		@			  {name:"审批意见", index:"opinion", type:"textarea",newline:true,length:8,required:"required"}
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+
+
+
+
+		
+		<!-- 按钮 -->
+
+
+		@ include("/common/_curd/_btn.html", {btn_save:"提交", btn_close:"关闭"}) {}
+	</form>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var layerIndex = parent.layer.getFrameIndex(window.name), //获取窗口索引
+            storage_clickNum = 0,save_clickNum = 0;
+
+        $("#_next").on("click",function () {
+            var index = layer.open({
+                type: 2,
+                title:'选择可见性',
+                area: ['100%', '100%'],
+                maxmin:true,
+                shadeClose: true, //点击遮罩关闭
+                content:  '/user/userchoose?who=next',
+
+            });
+            this.layerIndex = index;
+        });
+
+        // $("#_copyman").on("click",function () {
+        //     var index = layer.open({
+        //         type: 2,
+        //         title:'选择可见性',
+        //         area: ['100%', '100%'],
+        //         maxmin:true,
+        //         shadeClose: true, //点击遮罩关闭
+        //         content:  '/user/userchoose?who=copy',
+        //
+        //     });
+        //     this.layerIndex = index;
+        // });
+
+
+
+    });
+</script>
+@}

@@ -1,0 +1,39 @@
+<view class='container'>
+  <!-- 背景图 -->
+  <image mode='widthFix' src='../../../images/meetBg.png'></image>
+  <view class='content-box'>
+     <view wx:if='{{meetData}}' class='meet-wrapper'>
+      <text>{{titleText}}:</text>
+      <!-- 会议列表 -->
+      <scroll-view class='meet-list' scroll-y='true'>
+          <block wx:for='{{meetData}}' wx:key='unique'>
+            <view bindtap='seeDetail' data-id='{{item.id}}' class='list-item'>
+              <text class='item-title'>{{item.theme}}</text>
+              <view class='clearfix item-tip'>
+                <text class='time'>开始时间：{{item.meettime}}</text>
+                <text class='num'>{{item.sign}}人已签到</text>
+              </view>
+            </view>
+          </block>
+          <view class='none'>没有更多的内容了...</view>
+      </scroll-view>
+    </view> 
+    
+    <!-- 没有会议 -->
+    <view wx:if='{{!meetData}}' class='no-meet'>
+      <image mode='widthFix' src='../../../images/noData.png'></image>
+      <view>没有待参加会议稍微休息一下吧~</view>
+    </view>
+    <!-- 底部导航 -->
+    <view class='bottom-wrapper'>
+      <view bindtap='tabSwitch' class='meet-item {{tabNav==0?"on":""}}' data-index='0'>
+        <text class='iconfont icon-my-meet'></text>
+        <text>我的会议</text>
+      </view>
+      <view bindtap='tabSwitch' class='meet-item {{tabNav==1?"on":""}}' data-index='1'>
+        <text class='iconfont icon-note'></text>
+        <text>参会记录</text>
+      </view>
+    </view>
+  </view>
+</view>

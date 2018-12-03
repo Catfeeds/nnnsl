@@ -1,0 +1,31 @@
+<view class='container'>
+  <view class='title-wrapper'>
+    <view class='title'>{{detail.theme}}</view>
+    <view class='title-tip'>
+      <text class='title-tip-left'>{{detail.meettime}}</text>
+      <text wx:if='detail.cart' class='title-tip-right'>{{tipText}}</text>
+    </view>
+  </view>
+  <view class='detail-content'>
+    <view class='statement'>
+      温馨提示：请在规定时间内签到，否则视为迟到。请假请提交您的请假事由。
+    </view>
+    <view class='meet-info'>
+      <view><text>会议要求：</text>{{detail.require}}</view>
+      <view><text>会议时间：</text>{{detail.meettime}}</view>
+      <view><text>会议地点：</text>{{detail.place}}</view>
+      <view><text>签到截止时间：</text>{{detail.meettime}}</view>
+    </view>
+    <view wx:if='{{isNoOver}}' class='meet-btn'>
+      <text wx:if='{{isNoSign}}' bindtap='signEvent' class='sign'>签到</text>
+      <text wx:if='{{isNoLeave}}'  bindtap='leaveEnvet' class='leave'>请假</text>
+    </view>
+    <view class='other-info {{isLeave?"to-leave":""}}'>
+      <view class='people'>
+        <view class='people-tit'>已签到人员</view>
+        <view class='people-con'>{{detail.username}}</view>
+      </view>
+    </view>
+  </view>
+  <toast id='toast'>{{content}}</toast>
+</view>

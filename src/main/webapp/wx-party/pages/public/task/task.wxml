@@ -1,0 +1,29 @@
+<!-- 内容容器 -->
+<view class='container'>
+  <!-- 选项卡导航 -->
+  <view class='tab-nav-wrapper'>
+    <view class='tab-nav'>
+      <text bindtap='tabSwitch' data-index='0' class='{{tabNav==0?"on":""}}'>最新</text><text bindtap='tabSwitch' data-index='1' class='{{tabNav==1?"on":""}}'>未完成</text><text bindtap='tabSwitch' data-index='2' class='{{tabNav==2?"on":""}}'>已完成</text>
+    </view>
+  </view>
+  <!-- 通知列表 -->
+  <view class='task-list'>
+    <block wx:for='{{taskData}}' wx:key='unique'>
+      <view bindtap='seeDatil' data-id='{{item.id}}' class='task-list-item'>
+        <view class='item-title'>
+          <text class='status {{item.isover===1?"grey":item.iscomp===1?"on":""}}'>{{item.isover===1?"已截止":item.iscomp===1?"已完成":"未完成"}}</text>{{item.title}}
+        </view>
+        <view class='item-tip'>
+          <view class='clearfix item-info'>
+            <view class='time'>
+              <view>开始时间：{{item.start}}</view>
+              <view>截止时间：{{item.over}}</view>
+            </view>
+            <text class='num'>{{item.compnum===null?'0':item.compnum}}人已完成</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class='none'>没有更多的任务了...</view>
+  </view>
+</view>

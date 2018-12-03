@@ -1,0 +1,24 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/update" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="nsl_files_vislog";
+		@ var _key="id";
+		@ var _col=[
+@			  {name:"", index:"id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"文件", index:"f_id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"增加可见人", index:"visible", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"操作人", index:"u_id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"操作前", index:"befor", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"操作后", index:"after", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"操作时间", index:"date", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"操作前(id)", index:"beforid", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"操作后(id)", index:"afterid", type:"text",newline:true,length:8,required:"required"}		
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+	</form>
+
+@}

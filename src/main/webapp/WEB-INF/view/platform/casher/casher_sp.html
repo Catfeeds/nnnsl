@@ -1,0 +1,157 @@
+@layout("/common/_curd/_container.html"){
+<style>
+	th{
+		text-align:center;
+	}
+	.ui-jqgrid tr.jqgrow td {
+		white-space: normal !important;
+		height:auto;
+		vertical-align:center;
+		padding-top:2px;
+	}
+</style>
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+        $(function(){
+            var userid = ""
+            var deptid = ""
+            var ajaxURL = "/user/getuser";
+            $.post(ajaxURL,null,function (res) {
+                console.log(res)
+                userid = res.uid
+                deptid = res.did
+                $('#userid').val(userid)
+                $('#deptid').val(deptid)
+                initGrid();
+            });
+            initMenuBtn("btns", "${code}");
+        });
+
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = ["",
+						"标题",
+						"经办人",
+						"部门", 
+						"报销类别", 
+						"填表时间",
+						"事由",
+            			"审核状态",
+						"审核状态",
+						"开始时间", 
+						"结束时间",
+						"票据张数",
+            			"审批意见",
+            			"审批操作",
+						"可见人"
+		];
+		var _colmodel = [{name:"id", index:"id", hidden:true,width:100},
+            			{name:"title", index:"title", width:100},
+						{name:"uname", index:"uname", width:100},
+						{name:"fullname", index:"fullname", width:100},
+						{name:"dname", index:"dname", width:100},
+						{name:"date", index:"date", width:100},
+						{name:"cause", index:"cause", width:100},
+            			{name:"status", index:"status",hidden:true, width:100},
+						{name:"sname", index:"sname", width:100},
+						{name:"start", index:"start", width:100},
+						{name:"over", index:"over", width:100},
+						{name:"num", index:"num", width:100},
+            			{name:"opinion", index:"opinion", width:100,hidden:true},
+						{name:"num", index:"num", width:100,formatter:function (value, row, index) {
+								return '<a href="#" class="btn btn-btn btn-success btn-xs" onclick="sub('+"'"+index.id+"'"+')">'+"填写审批意见"+'</a>';
+							}},
+						{name:"visible", index:"visible", hidden:true,width:100}
+						];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "status",
+				where:"{uid:"+$('#userid').val()+"}",
+				order : "asc"}
+		});
+
+
+
+        //填写审批意见
+        sub = function (entId) {
+            var index = layer.open({
+                type: 2,
+                title:'填写审批意见',
+                area: ['90%', '70%'],
+                maxmin:true,
+                shadeClose: true, //点击遮罩关闭
+                content:  '/files/opinion?mode=bx&&id='+entId
+            });
+            this.layerIndex = index;
+        };
+	}
+</script>
+	<input type="hidden" value="" id="deptid">
+	<input type="hidden" value="" id="userid">
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+			@		{name:"经办人", index:"uname", type:"text"},
+			@		{name:"部门", index:"fullname", type:"text"},
+			@		{name:"报销类别", index:"dname", type:"text"},
+			@		{name:"标题", index:"title", type:"text"},
+			@		{name:"事由", index:"cause", type:"text"},
+			@		{name:"票据张数", index:"num", type:"text"},
+			@		{name:"审批意见", index:"opinion", type:"text"},
+			@		{name:"审批意见", index:"sname", type:"text"}
+			@];
+			@ include("/common/_function/_search_casher.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<!--<div class="welljq well-sm" id="btns"></div>-->
+			<div style="margin: 0 0 5px 5px">
+				<input type="button" class="btn btn-white" id="casher_view"  value="查看票据"> &nbsp;&nbsp;
+				<input type="button" class="btn btn-white"  onclick="sta()" value="查看审批记录">
+			</div>
+
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+
+
+<script>
+    function sta(){ //查看审批意见
+        var ids = $("#grid-table").jqGrid("getGridParam", "selarrrow");
+        console.log(ids.length)
+		if(ids.length>1){
+            layer.msg("一次只能审批一条");
+            return false;
+		}else if(ids.length<1){
+            layer.msg("您要审批哪一条申请？");
+            return false;
+		}
+            var index = layer.open({
+                type: 2,
+                title:'查看审批记录',
+                area: ['100%', '100%'],
+                maxmin:true,
+                shadeClose: true, //点击遮罩关闭
+                content:  '/casher/casherlog?cid='+ids
+            });
+            this.layerIndex = index;
+    }
+</script>
+@}	

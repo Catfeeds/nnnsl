@@ -1,0 +1,16 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/fileslog/update" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		<input type="hidden" value="${splogid!}" name="nsl_files_log.id">
+		<input type="hidden" value="1" name="review">
+		@ var _table="nsl_files_log";
+		@ var _key="id";
+		@ var _col=[
+		@			  {name:"审批意见", index:"review", type:"textarea",newline:true,length:8,required:"required"}
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table}){}
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"提交", btn_close:"关闭"}) {}
+	</form>
+@}

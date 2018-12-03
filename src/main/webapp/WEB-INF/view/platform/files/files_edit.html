@@ -1,0 +1,249 @@
+@layout("/common/_curd/_container.html"){
+<style rel="stylesheet" type="text/css">
+	.uploadWrapper{
+		width: 100%;
+		padding: 10px;
+		border: 1px #dadada solid;
+	}
+	.uploadWrapper .selectFile,
+	.uploadWrapper .fileItem .delBtn{
+		padding: 5px 15px 5px 15px;
+		border: 1px #c4c4c6 solid;
+		border-radius: 5px;
+		margin-right: 15px;
+		background-color: #fff;
+		cursor: pointer;
+	}
+	.uploadWrapper .fileList{
+		display: none;
+	}
+	.uploadWrapper .fileItem{
+		width: 100%;
+		display: flex;
+		padding: 5px 0;
+		text-align: center;
+		border-bottom: 1px #dadada solid;
+	}
+	.uploadWrapper .fileItem span:not(.delBtn){
+		flex: 1;
+		margin-right: 15px;
+	}
+	.uploadWrapper .fileItem .delBtn{
+		padding: 2px 15px 2px 15px;
+		background-color: #fff;
+		cursor: pointer;
+		font-size: 12px;
+	}
+	.uploadWrapper .fileItem span.status{
+		/*color: #449d44;*/
+		font-size: 12px;
+	}
+	.uploadWrapper .selectFile:hover,
+	.uploadWrapper .fileItem .delBtn:hover{
+		background-color: #eee;
+	}
+	.comments {
+		width:100%;/*自动适应父布局宽度*/
+		overflow:auto;
+		word-break:break-all;/*在ie中解决断行问题(防止自动变为在一行显示，主要解决ie兼容问题，ie8中当设宽度为100%时，文本域类容超过一行时，当我们双击文本内容就会自动变为一行显示，所以只能用ie的专有断行属性“word-break或word-wrap”控制其断行)*/
+	}
+</style>
+
+<form data-url="${basePath}/${code}/update" method="post" class="form-horizontal" role="form">
+	<!-- 表单 -->
+	<div class="row" style="display:block">
+		<label for="uploadWrapper" class="col-sm-2 control-label no-padding-right">选择文件</label>
+		<div class="col-sm-8">
+			<div id="uploadWrapper" class="uploadWrapper">
+				<label for="upload" class="selectFile">
+					选择文件<input id="upload" style="display: none;" name="uploadfile" type="file" multiple="true" />
+					<input type="hidden" name="nsl_files.title_o" id="uploadfiles"  class="form-control" />
+				</label>
+				<span style="font-size: 14px;">提示：每个文件大小不超过100MB</span>
+				<ul style="list-style: none;width: 95%;" class="fileList">
+				</ul>
+			</div>
+		</div>
+
+
+
+	</div>
+
+	@ var _table="nsl_files";
+	@ var _key="id";
+	@ var _col=[
+	@			  {name:"公文类型", index:"type", type:"select_103",newline:true,length:8,required:"required"},
+	@			  {name:"公文文号", index:"num", type:"text",newline:true,length:8,required:"required"},
+	@			  {name:"可见人", index:"selectname", type:"text",newline:true,length:8,required:"required"},
+	@			  {name:"可见人 index:"visiable", type:"hidden",newline:true,length:8},
+	@			  {name:"公文描述", index:"discript", type:"textarea",newline:true,length:8,required:"required"}
+	@		   ];
+	@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+
+
+
+	<!-- 按钮 -->
+	@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+</form>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var upload = new UploadFile();
+        upload.init();
+        function UploadFile() {
+            this.fileArr = [];
+            this.nameTemp = [];
+            this.uploadInput = $("#upload");
+            this.fileList = $(".fileList");
+            // 初始化
+            this.init = function () {
+                var _this = this;
+                this.uploadInput.change(function () {
+                    if(this.value){
+                        this.files.length && _this.selectFile.call(_this,this.files);// 此处可以对文件个数作限制，默认不限制
+                        this.value = "";
+                    }
+                });
+                "${files.title_o!}"!="" && this.renderOldFile.call(this,"${files.title_o!}");
+            }
+            /**
+             * 之前选择的文件信息预览
+             * file  文件
+             */
+            this.renderOldFile = function (fileName) {
+                var htmlStr = "",_this = this;
+                fileName.split(",").forEach(function (val,index) {
+                    _this.nameTemp.push(val);
+                    htmlStr += "<li class='fileItem'><span class='fileName'>"+val+"</span><span>--</span><span style='color:#449d44;' class='status'>已上传</span><span class='delBtn'>删除</span></li>";
+                });
+                this.fileList.append(htmlStr);
+                this.fileList.show();
+                setTimeout(function () {
+                    $("#uploadfiles").val(_this.nameTemp);
+                    _this.delFile.call(_this);
+                },1000/30);
+            }
+        }
+
+        /**
+         * 文件选择并缓存文件信息
+         * fileArr  所选文件数组
+         */
+        UploadFile.prototype.selectFile = function (fileArr){
+            var _this = this;
+            [].slice.call(fileArr).forEach(function (val,index) {
+                (function (i) {
+                    var file = fileArr.item(i);
+                    _this.fileArr.push(file);
+                    _this.renderFile.call(_this,file,i);
+                })(index);
+            });
+            this.delFile.call(this);
+
+        }
+
+        /**
+         * 新选择的文件信息预览
+         * file  文件
+         */
+        UploadFile.prototype.renderFile = function (file,index) {
+            var htmlStr = "",
+                maxSize = 30,// 支持文件最大10MB
+                fileSize = file.size,// 文件大小
+                filename = file.name,// 文件名字
+                fileType = filename.split('.').pop();// 文件大小
+            if(fileType){// 此处是文件类型，可以作对应的限制，例如 fileType==="png"
+                if(fileSize <= maxSize*1024*1024){// 文件大小限制
+                    var size = (fileSize/1024/1024).toFixed(2);
+                    htmlStr = "<li class='fileItem'><span class='fileName'>"+filename+"</span><span>"+size+"MB</span><span class='status'>未上传</span><span class='delBtn'>删除</span></li>";
+                    this.fileList.append(htmlStr);
+                    this.uploadEvent.call(this,file,index);
+                    index===0&&this.fileList.show();
+                }
+            }
+        }
+
+
+
+        // 对所选文件进行删除(上传前)
+        UploadFile.prototype.delFile = function () {
+            var _this = this;
+            $(".fileItem > .delBtn").on("click",function () {
+                var $this = $(this);
+                _this.nameTemp.forEach(function (val,index) {
+                    if(val === $this.siblings(".fileName").text()){
+                        _this.nameTemp.splice(index,1);return true;
+                    }
+                });
+                $("#uploadfiles").val(_this.nameTemp);// 缓存文件名字
+                $(this).parents(".fileItem").remove();
+                _this.fileArr.splice($(this).parents(".fileItem").index(),1);
+            });
+        }
+
+        /**
+         * 文件上传
+         *  file   文件
+         *  index  文件在缓存文件数组中的索引
+         */
+        UploadFile.prototype.uploadEvent = function (file,index) {
+            var _this = this;
+            if(file){
+                var formdata = new FormData();
+                formdata.append("file",file);
+                $.ajax({
+                    url:"/files/upload",
+                    type:"POST",
+                    data:formdata,
+                    processData: false,
+                    contentType: false,
+                    success: function (res) {
+                        if(res['flag'] === true ) {
+                            _this.nameTemp.push(res.fileName);
+                            if(index === _this.fileArr.length-1){// 所有文件上传完成
+                                _this.fileArr = [];// 清空文件缓存数组
+                            }
+                            $("#uploadfiles").val(_this.nameTemp);
+                            $(".fileItem > .status").text("上传成功");
+                            $(".fileItem > .status").css("color","#449d44");
+                        }
+                    }
+                });
+            }
+        }
+
+
+        var layerIndex = parent.layer.getFrameIndex(window.name), //获取窗口索引
+            storage_clickNum = 0,save_clickNum = 0;
+
+
+
+
+        $("#_selectname").on("click",function () {
+            var index = layer.open({
+                type: 2,
+                title:'选择可见性',
+                area: ['100%', '100%'],
+                maxmin:true,
+                shadeClose: true, //点击遮罩关闭
+                content:  '/user/userchoose?who=leader',
+
+            });
+            this.layerIndex = index;
+        });
+
+        $("#_copyman").on("click",function () {
+            var index = layer.open({
+                type: 2,
+                title:'选择可见性',
+                area: ['100%', '100%'],
+                maxmin:true,
+                shadeClose: true, //点击遮罩关闭
+                content:  '/user/userchoose?who=copy',
+
+            });
+            this.layerIndex = index;
+        });
+
+    });
+</script>
+@}

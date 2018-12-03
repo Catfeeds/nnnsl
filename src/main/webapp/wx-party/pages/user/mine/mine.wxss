@@ -1,0 +1,53 @@
+.container .mine-title{
+  padding: 40rpx;
+  border: 2rpx solid #ddd;
+}
+.container .mine-img{
+  float: left;
+  width: 220rpx;
+  height: 260rpx;
+  overflow: hidden;
+  border-radius: 15rpx;
+  border: 8rpx solid #E83C3C;
+}
+.container .mine-img image{width: 100%;}
+.container .mine-info{
+  overflow: hidden;
+  padding-left: 25rpx;
+}
+.container .mine-info .info-item{
+  line-height: 68rpx;
+  font-size: 34rpx;
+  color: #E83C3C;
+}
+.container .mine-info .info-item text{
+  color: #333;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.container .info-item text::before{
+  color: #E83C3C;
+  font-size: 40rpx;
+  font-weight: normal;
+  margin-right: 15rpx;
+}
+.container .other-info .info-item text::before,.container .detail-info .info-item text::before{font-size: 32rpx;}
+.container .detail-info,.container .other-info{
+  padding: 20rpx 0 20rpx 30rpx;
+  border-top: 2rpx solid #ddd;
+  border-bottom: 2rpx solid #ddd;
+}
+.container .other-info .info-item{
+  font-size: 30rpx;
+  line-height: 60rpx;
+}
+.container .detail-info .info-item{
+  font-size: 30rpx;
+  line-height: 65rpx;
+  border-bottom: 2rpx dashed #ddd;
+}
+.container .detail-info .info-item:not(:first-child){padding-top: 20rpx;}
+.container .detail-info .info-item text,.container .other-info .info-item text{
+  font-size: 32rpx;
+  font-weight: bold;
+}

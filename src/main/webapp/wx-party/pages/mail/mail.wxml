@@ -1,0 +1,35 @@
+<view class='container'>
+  <!-- 搜索框 -->
+  <view class='search-wrapper'>
+    <input class='search-input' bindinput='searchInp' placeholder-class='p-input' type='text' value='{{searchText}}' placeholder='输入名字/手机号进行搜索'>
+      <text class='iconfont icon-search' bindtap='searchEvent'></text>
+    </input>
+  </view>
+  <!-- 通讯录列表 -->
+  <view class='mail-wrapper'>
+    <!-- 通讯录索引标题 -->
+    <view class='mail-title'><text bindtap='toIndex'>党员通讯录</text></view>
+    <!-- 通讯录组织结构 -->
+    <view class='mail-list'>
+      <block wx:for='{{memberData}}' wx:key='index'>
+        <view class='mail-member mail-item'>
+          <view class='img-box'>
+            <image mode='scaleToFill' src='{{item.url?item.url:defaultImg}}' binderror="imgError" data-errorimg="{{index}}"></image>
+          </view>
+          <view class='member-info'>
+            <view class='member-name'>{{item.NAME?item.NAME:"暂无"}}</view>
+            <view class='member-tel'>所属部门：{{item.DEPTNAME?item.DEPTNAME:"暂无"}}</view>
+            <view class='member-tel'>联系方式：{{item.PHONE?item.PHONE:"暂无"}}</view>
+            <text bindtap='showCallBtn' data-phone='{{item.PHONE}}' class='iconfont icon-tel'></text>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view wx:if='{{isNone}}' class='none'>暂时没有相关数据...</view>
+  </view>
+  <!-- 操作框-弹出层 -->
+  <action-sheet hidden="{{hiddenBtn}}" bindchange="actionChange">    
+      <action-sheet-item bindtap="callEvent">拨打电话</action-sheet-item>
+      <action-sheet-cancel>取消</action-sheet-cancel>  
+  </action-sheet>
+</view>

@@ -1,0 +1,22 @@
+<import src="../../../../lib/wxParse/wxParse.wxml"/>
+<view class='container'>
+
+<view class='title' bindtap='toModel' data-page='clean'>内容 <text class='textdate'>{{detail.shyk.time}}</text></view>
+
+
+  <view class='imgs'>
+   
+    <view class='box'>
+     
+      <text>{{detail.shyk.content}}</text>
+    </view>
+  </view>
+
+
+  <view class='title' bindtap='toModel' data-page='clean'>图片</view>
+  <view class='img'>
+   <image wx:for='{{detail.imgs}}' wx:key='unique' mode='widthFix' src='{{rootImg+item}}' binderror="imgError" data-errorimg="{{index}}"></image>
+  </view>
+
+</view>
+ 

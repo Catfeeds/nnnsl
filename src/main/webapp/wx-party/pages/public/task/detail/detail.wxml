@@ -1,0 +1,41 @@
+<import src="../../../../lib/wxParse/wxParse.wxml"/>
+<view class='container'>
+  <view class='title-wrapper'>
+    <view class='title'>{{detail.title}}</view>
+    <view class='title-tip'>
+      <view class='title-tip-left'>结束时间：{{detail.over}}</view>
+      <!-- <view class='title-tip-right'>{{detail.dept?detail.dept:"无"}}</view> -->
+    </view>
+  </view>
+  <view class='detail-content'>
+    <view class='content-box'><template is="wxParse" data="{{wxParseData:content.nodes}}"/></view>
+    <view class='statement'>
+      温馨提示：请在规定时间内完成任务，否则视为未完成。
+    </view>
+    <view class='task-info'>
+      <view><text>任务时间：</text>{{detail.start}} - {{detail.over}}</view>
+      <view><text>任务分类：</text>{{detail.cart?detail.cart:""}}</view>
+    </view>
+    <view class='model-title'>图片添加</view>
+    <view class='img-list'>
+      <block wx:for='{{imgList}}' wx:key='unique'>
+        <image mode='scaleToFill' src='{{item}}'></image>
+      </block>
+      <image mode='scaleToFill' bindtap='addImage' src='/images/uploads.png'></image>
+    </view>
+    <view class='inline model-title'>内容录入</view>
+    <view class="section">
+      <textarea placeholder="请输入内容" bindinput='textInp' name="textarea" class='content'/>
+      <button bindtap='submitTask' disabled='{{detail.iscomp===1 || detail.isover === 1}}'  class='btn {{detail.iscomp===1 || detail.isover === 1?"yes":""}}'>{{detail.isover === 1?"已截止":detail.iscomp===1?"我已完成":"完成"}}</button>
+
+    </view>
+    <view class='other-info'>
+      <view class='people'>
+        <view class='people-tit'>
+          <view>{{detail.compnum===null?'0':detail.compnum}} 人已完成</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <toast id='toast'>{{content}}</toast>
+</view>
